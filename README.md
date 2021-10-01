@@ -1,9 +1,9 @@
-# AMT_2021
+# MyGarden
 
 	
 Applications multi-tiers (AMT)
 
-Haute École d'Ingénieurie et Gestion du Canton du Vaud
+Haute École d'Ingénierie et Gestion du Canton du Vaud
 
 
 ---------------------------------------------
