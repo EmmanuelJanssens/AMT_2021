@@ -17,7 +17,7 @@ class HelloWorldTest {
 
         @Test
         void test(){
-            //testingNumber++;
+            testingNumber++;
             Assertions.assertEquals(2 ,testingNumber);
         }
 
