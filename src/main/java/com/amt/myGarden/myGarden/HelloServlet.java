@@ -1,10 +1,10 @@
 package com.amt.myGarden.myGarden;
 
 import java.io.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
+@WebServlet("/helloServlet")
 public class HelloServlet extends HttpServlet {
     private String message;
 
@@ -12,6 +12,7 @@ public class HelloServlet extends HttpServlet {
         message = "Hello World!";
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
@@ -20,6 +21,7 @@ public class HelloServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
+        out.close();
     }
 
     public void destroy() {

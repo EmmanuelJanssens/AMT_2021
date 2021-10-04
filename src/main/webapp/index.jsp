@@ -78,7 +78,8 @@
                 <div class="col-md-6">
                     <div class="full">
                         <h1><strong class="cur">Best</strong><br>Fresh Red Apple</h1>
-                            <p>The bestest apple in the west</p>
+                            <a href="${pageContext.request.contextPath}/helloServlet">Hello Servlet</a>
+                            <p><%= "The bestest apple in amt" %></p>
                             <div class="button_section"><a class="main_bt" href="#">Buy Now</a></div>
                     </div>
                 </div>
@@ -191,7 +192,7 @@
                         <img class="img-responsive" src="images/blog1.png" alt="#" />
                     </div>
                     <div class="full blog_blue text_align_center">
-                        <h5 class="white_font">Post by Teo Ferrari 27/07/2019</h3>
+                        <h3 class="white_font">Post by Teo Ferrari 27/07/2019</h3>
                         <p>Incredible product !!</p>
                     </div> 
                      </div>  
@@ -202,7 +203,7 @@
                         <img class="img-responsive" src="images/blog2.png" alt="#" />
                     </div> 
                     <div class="full blog_blue text_align_center">
-                        <h5 class="white_font">Post by Emmanuel Janssens 27/07/2019</h3>
+                        <h3 class="white_font">Post by Emmanuel Janssens 27/07/2019</h3>
                         <p>Very peachy</p>
                     </div>
                      </div>
@@ -213,7 +214,7 @@
                         <img class="img-responsive" src="images/blog3.png" alt="#" />
                     </div> 
                     <div class="full blog_blue text_align_center">
-                        <h5 class="white_font">Post by David Mark 27/07/2019</h3>
+                        <h3 class="white_font">Post by David Mark 27/07/2019</h3>
                         <p>Apple time !</p>
                     </div>
                     </div>
