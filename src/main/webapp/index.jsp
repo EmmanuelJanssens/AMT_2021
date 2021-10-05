@@ -79,7 +79,8 @@
                     <div class="full">
                         <h1><strong class="cur">Best</strong><br>Fresh Red Apple</h1>
                             <a href="${pageContext.request.contextPath}/helloServlet">Hello Servlet</a>
-                            <p><%= "The bestest apple in amt" %></p>
+                        <a href="http://localhost:8081/demo/all">Get all fruits</a>
+                        <p><%= "The bestest apple in amt" %></p>
                             <div class="button_section"><a class="main_bt" href="#">Buy Now</a></div>
                     </div>
                 </div>
