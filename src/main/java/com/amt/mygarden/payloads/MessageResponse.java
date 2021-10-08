@@ -1,4 +1,4 @@
-package com.amt.myGarden.myGarden.payloads;
+package com.amt.mygarden.payloads;
 
 public class MessageResponse {
 

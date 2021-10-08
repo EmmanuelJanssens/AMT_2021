@@ -1,8 +1,8 @@
-package com.amt.myGarden.myGarden.repository;
+package com.amt.mygarden.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.amt.myGarden.myGarden.models.Fruit;
+import com.amt.mygarden.models.Fruit;
 
 public interface FruitRepository extends CrudRepository<Fruit, Integer>{
 }

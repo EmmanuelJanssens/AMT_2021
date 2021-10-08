@@ -1,4 +1,4 @@
-package com.amt.myGarden.myGarden.models;
+package com.amt.mygarden.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

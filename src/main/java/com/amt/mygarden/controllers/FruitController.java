@@ -1,8 +1,8 @@
-package com.amt.myGarden.myGarden.controllers;
+package com.amt.mygarden.controllers;
 
-import com.amt.myGarden.myGarden.models.Fruit;
-import com.amt.myGarden.myGarden.payloads.FruitRequest;
-import com.amt.myGarden.myGarden.repository.FruitRepository;
+import com.amt.mygarden.models.Fruit;
+import com.amt.mygarden.payloads.FruitRequest;
+import com.amt.mygarden.repository.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +31,7 @@ public class FruitController {
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Fruit> getAllFruits() {
+
         // This returns a JSON or XML with the users
         return fruitRepository.findAll();
     }

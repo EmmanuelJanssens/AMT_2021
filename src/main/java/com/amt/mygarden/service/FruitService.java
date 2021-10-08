@@ -1,15 +1,11 @@
-package com.amt.myGarden.myGarden.service;
+package com.amt.mygarden.service;
 
-import com.amt.myGarden.myGarden.models.Fruit;
-import com.amt.myGarden.myGarden.payloads.FruitRequest;
-import com.amt.myGarden.myGarden.payloads.MessageResponse;
-import com.amt.myGarden.myGarden.repository.FruitRepository;
+import com.amt.mygarden.models.Fruit;
+import com.amt.mygarden.payloads.FruitRequest;
+import com.amt.mygarden.payloads.MessageResponse;
+import com.amt.mygarden.repository.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FruitService {
@@ -28,6 +24,9 @@ public class FruitService {
     public Fruit getASingleFruit(Integer fruitId) throws Exception{
         return fruitRepository.findById(fruitId).orElseThrow(() -> new Exception("fruit not found"));
     }
+
+
+
 
 
 
