@@ -1,0 +1,19 @@
+services:
+  mygarden:
+    build: .
+    ports:
+      - "8080:8080"
+      - "9000:8000"
+    environment:
+      JPDA_ADDRESS: "*:8000"
+      JPDA_TRANSPORT: dt_socket
+    depends_on:
+      - "mygarden-mysql"
+
+  mygarden-mysql:
+    image: "mysql"
+    ports :
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+
