@@ -23,8 +23,7 @@ public class FruitController {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        Fruit f = new Fruit();
-        f.setName(name);
+        Fruit f = new Fruit(name);
         fruitRepository.save(f);
         return "Saved";
     }
