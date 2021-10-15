@@ -1,7 +1,5 @@
 name: deployment
-on:
-  push:
-    - fb-add-continous-deployment
+on: push
   # todo: remplcer par la branche master
 jobs:
   deploy:
