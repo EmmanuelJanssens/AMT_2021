@@ -5,9 +5,9 @@ class Fruit <<entity>>{
 -Long id
 -String name
 +Fruit(String name)
-+fruit()
+-Fruit()
 +getName()
-getId()
++setName()
 
 }
 @enduml
