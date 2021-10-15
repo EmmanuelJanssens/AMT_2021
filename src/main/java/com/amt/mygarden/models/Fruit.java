@@ -14,7 +14,10 @@ public class Fruit {
     private String name;
 
     public Fruit(String name) {
-        this.name = name;
+        if(name.isEmpty())
+            throw new IllegalArgumentException();
+
+        setName(name);
     }
 
     public Fruit() {
