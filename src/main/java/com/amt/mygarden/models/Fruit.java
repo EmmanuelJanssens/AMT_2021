@@ -20,7 +20,7 @@ public class Fruit {
         setName(name);
     }
 
-    public Fruit() {
+    private Fruit() {
         //ORM
     }
 
