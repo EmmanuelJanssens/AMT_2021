@@ -10,7 +10,7 @@ jobs:
         with:
           key: ${{secrets.AMT_DMZ_MYGARDEN}}
           name: id_rsa-dmz
-          known_hosts: ${{ secrets.KNOWN_HOSTS_OF_DMZ }}
+          known_hosts: '${{ secrets.KNOWN_HOSTS_OF_DMZ }}'
           config: |
             Host dmz
               HostName xxx.xxx.xxx.xxx
@@ -21,7 +21,7 @@ jobs:
         with:
           key: ${{secrets.AMT_MYGARDEN}}
           name: id_rsa-target
-          known_hosts: ${{ secrets.KNOWN_HOSTS_OF_MYGARDEN }} # will be appended to existing .ssh/known_hosts
+          known_hosts: '${{ secrets.KNOWN_HOSTS_OF_MYGARDEN }}' # will be appended to existing .ssh/known_hosts
           config: |                                         # will be appended to existing .ssh/config
             Host target
               HostName yyy.yyy.yyy.yyy
