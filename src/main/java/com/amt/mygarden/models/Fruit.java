@@ -14,6 +14,8 @@ public class Fruit {
     private String name;
 
     public Fruit(String name) {
+        if(name.isEmpty())
+            throw new IllegalArgumentException();
 
         setName(name);
     }
@@ -26,7 +28,7 @@ public class Fruit {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
