@@ -13,7 +13,7 @@ jobs:
           known_hosts: 'placeholder'
           config: |
             Host dmz
-              HostName xxx.xxx.xxx.xxx
+              HostName 16.170.194.237
               User MYGARDEN
               IdentityFile ~/.ssh/id_rsa-dmz
       - name: Install SSH key of MYGARDEN
@@ -24,7 +24,7 @@ jobs:
           known_hosts: 'placeholder' # will be appended to existing .ssh/known_hosts
           config: |                                         # will be appended to existing .ssh/config
             Host target
-              HostName yyy.yyy.yyy.yyy
+              HostName 10.0.1.16:22
               User admin
               IdentityFile ~/.ssh/id_rsa-target
               ProxyCommand ssh -W %h:%p dmz
