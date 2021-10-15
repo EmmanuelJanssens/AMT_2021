@@ -94,7 +94,7 @@ There is no need to configure specific run configurations, there are predefined 
 And you will be able to run the app.
 
 <p align="center">
-<img src="https://github.com/EmmanuelJanssens/AMT_2021/blob/documentation/documentation/images/run%20config.png" width = 50% />
+<img src="https://github.com/EmmanuelJanssens/AMT_2021/blob/dev/documentation/images/run_config.png" width = 50% />
 </p>
 
 * It will execute those maven goals clean and package
