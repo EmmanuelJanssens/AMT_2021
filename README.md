@@ -58,12 +58,12 @@ We will be using IntelliJ IDEA Ultimate 2021.1.2
 
 ### Platform
 
-The app is going to be developed in J2EE. The J2EE platform consists of a set of services, APIs, and protocols that provide the functionality for developing multitiered, Web-based applications.
+The app is going to be developed in Spring. Spring consists of a set of services, APIs, and protocols that provide the functionality for developing multitiered, Web-based applications.
 
 
 ### Database
 
-//To be decided by the group 
+The app use MySql for the database.
 
 ### Reverse proxy
 
@@ -71,7 +71,7 @@ Reverse Proxy will run in Debian 11 - Ngix.
 
 ### Linux Distribution
 
-//To be decided by the group 
+Debian 11
 
 ### Front-end choice
 
@@ -82,31 +82,26 @@ We choose to use the following layout for the Front-end of the app:
 
 
 ---------------------------------------------
-# Build
-
-//TODO and Example
+# Build and Run
 
 Make sure Maven is installed and on the PATH.
 
+You must have docker installed and running
+
 The java source is Java 1.8+ so any JDK 1.8 or later will work. However, in order to generate the javadoc and UML diagrams the JDK version must be *strictly 1.8*.
 
+There is no need to configure specific run configurations, there are predefined xml config files under ./runConfiguration. All you need to do is add them
+And you will be able to run the app.
 
-run script 
+<p align="center">
+<img src="https://github.com/EmmanuelJanssens/AMT_2021/blob/documentation/documentation/images/run%20config.png" width = 50% />
+</p>
 
-    build-all.bat
+* It will execute those maven goals clean and package
+* It will execute a docker compose file wich will pull two images from the hub : tomcat:9 and mysql
+  * your packaged .war file will be transported into the tomcat webapps folder
+* after execution you will be able to access the app via http://localhost:8080/
 
----------------------------------------------
-# Running
-
-//TODO and Example 
-
-make sure a JRE is installed and on the PATH
-
-run script 
-
-    run-app.bat 
-
----------------------------------------------
 # Project Structure
 
 apps
@@ -115,13 +110,13 @@ apps
 - Main class
 - application properties in resource folder
 
-bootstrap app
+load database
 
-- simple app to bootstrap the database and execute a basic end to end "smoke" test.
+- the database is loaded by using the Bean API
 
-integration tests
+unit tests
 
-- jUnit for runing integration tests
+- jUnit for running units tests
 
 core
 
@@ -133,7 +128,7 @@ infrastructure
 
 persistence
 
-- repository implementation (JPA, im memory, spring data)```
+- repository implementation (JPA, spring data)```
 
 ---------------------------------------------
 # Architecture
@@ -149,7 +144,6 @@ Model - Model represents an object carrying data. It can also have logic to upda
 View - View represents the visualization of the data that model contains.
 
 Controller - Controller acts on both model and view. It controls the data flow into model object and updates the view whenever data changes. It keeps view and model separate.
-
 
 
 ---------------------------------------------
