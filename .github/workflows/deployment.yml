@@ -8,7 +8,7 @@ jobs:
       - name: Install SSH key of DMZ
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{secrets.AMT-DMZ-MYGARDEN}}
+          key: ${{secrets.AMT_DMZ_MYGARDEN}}
           name: id_rsa-dmz
           known_hosts: ${{ secrets.KNOWN_HOSTS_OF_DMZ }}
           config: |
@@ -19,7 +19,7 @@ jobs:
       - name: Install SSH key of MYGARDEN
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{secrets.AMT-MYGARDEN}}
+          key: ${{secrets.AMT_MYGARDEN}}
           name: id_rsa-target
           known_hosts: ${{ secrets.KNOWN_HOSTS_OF_MYGARDEN }} # will be appended to existing .ssh/known_hosts
           config: |                                         # will be appended to existing .ssh/config
