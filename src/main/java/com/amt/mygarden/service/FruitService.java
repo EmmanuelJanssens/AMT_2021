@@ -13,8 +13,7 @@ public class FruitService {
     FruitRepository fruitRepository;
 
     public MessageResponse createFruit(FruitRequest fruitRequest) {
-        Fruit newFruit = new Fruit();
-        newFruit.setName(fruitRequest.getName());
+        Fruit newFruit = new Fruit(fruitRequest.getName());
         return new MessageResponse("New Fruit created successfully");
     }
 
