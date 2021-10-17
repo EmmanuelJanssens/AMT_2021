@@ -21,7 +21,7 @@ jobs:
         with:
           key: ${{secrets.AMT_MYGARDEN}}
           name: id_rsa-target
-          known_hosts: 'placeholder' # will be appended to existing .ssh/known_hosts
+          known_hosts: 'SHA256:UhRsC417aZoZ9gzA/2Sxvn6LGBkLWFTKscfybbD0zIY.' # will be appended to existing .ssh/known_hosts
           config: |                                         # will be appended to existing .ssh/config
             Host target
               HostName 10.0.1.16
