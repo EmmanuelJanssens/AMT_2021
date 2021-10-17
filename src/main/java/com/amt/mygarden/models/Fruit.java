@@ -9,16 +9,19 @@ import javax.persistence.Id;
 public class Fruit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
 
-    public Integer getId() {
-        return id;
+    public Fruit(String name) {
+        if(name.isEmpty())
+            throw new IllegalArgumentException();
+
+        setName(name);
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    private Fruit() {
+        //ORM
     }
 
     public String getName() {

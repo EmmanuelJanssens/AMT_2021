@@ -11,20 +11,7 @@ class FruitTest {
 
     @BeforeEach
     void setUp() {
-        apple = new Fruit();
-        apple.setName("Apple");
-        apple.setId(0);
-    }
-
-    @Test
-    void getId() {
-        assertEquals(0, apple.getId());
-    }
-
-    @Test
-    void setId() {
-        apple.setId(1);
-        assertEquals(1, apple.getId());
+        apple = new Fruit("Apple");
     }
 
     @Test
@@ -33,8 +20,8 @@ class FruitTest {
     }
 
     @Test
-    void setName() {
-        apple.setName("Pomme");
-        assertEquals("Pomme", apple.getName());
+    void setName(){
+        apple.setName("Banana");
+        assertEqual("Banana", apple.getName());
     }
 }
