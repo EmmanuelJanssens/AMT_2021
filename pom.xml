@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.amt.myGarden</groupId>
-    <artifactId>myGarden</artifactId>
+    <groupId>com.amt.mygarden</groupId>
+    <artifactId>mygarden</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>myGarden</name>
+    <name>mygarden</name>
     <packaging>war</packaging>
 
     <properties>
@@ -60,14 +60,8 @@
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.5.2</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
@@ -115,7 +109,8 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
-            <scope>provided</scope>
+            <!--TODO uncomment this when pushing-->
+            <!--<scope>provided</scope>-->
         </dependency>
 
         <dependency>
