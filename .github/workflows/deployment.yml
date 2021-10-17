@@ -39,4 +39,4 @@ jobs:
       - name: Build with Maven
         run: mvn package --file pom.xml
       - name: 'Deploy to server'
-        run: rsync -e "ssh dmz ssh"  ./target/myGarden-1.0-SNAPSHOT.war target:./test-rsync/
+        run: scp  ./target/myGarden-1.0-SNAPSHOT.war target:./test-rsync/
