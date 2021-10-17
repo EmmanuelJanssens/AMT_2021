@@ -1,6 +1,8 @@
 name: deployment
-on: push
-  # todo: remplacer par la branche master
+on: 
+  push:
+    branches:
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
