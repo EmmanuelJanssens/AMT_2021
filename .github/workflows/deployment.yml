@@ -26,6 +26,8 @@ jobs:
             Host target
               HostName 10.0.1.16
               User admin
+              StrictHostKeyChecking=no
+              UserKnownHostsFile=/dev/null
               IdentityFile ~/.ssh/id_rsa-target
               ProxyCommand ssh -W %h:%p dmz
       - name: Adding Known Hosts
