@@ -1,0 +1,46 @@
+name: deployment
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH key of DMZ
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{secrets.AMT_DMZ_MYGARDEN}}
+          name: id_rsa-dmz
+          known_hosts: 'placeholder'
+          config: |
+            Host dmz
+              HostName 16.170.194.237
+              User MYGARDEN
+              IdentityFile ~/.ssh/id_rsa-dmz
+      - name: Install SSH key of MYGARDEN
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{secrets.AMT_MYGARDEN}}
+          name: id_rsa-target
+          known_hosts: 'SHA256:UhRsC417aZoZ9gzA/2Sxvn6LGBkLWFTKscfybbD0zIY.' # will be appended to existing .ssh/known_hosts
+          config: |                                         # will be appended to existing .ssh/config
+            Host target
+              HostName 10.0.1.16
+              User admin
+              StrictHostKeyChecking=no
+              UserKnownHostsFile=/dev/null
+              IdentityFile ~/.ssh/id_rsa-target
+              ProxyCommand ssh -W %h:%p dmz
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H 16.170.194.237 >> ~/.ssh/known_hosts
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn package --file pom.xml
+      - name: 'Deploy to server'
+        run: scp  ./target/myGarden-1.0-SNAPSHOT.war target:/opt/tomcat/webapps/ROOT.war

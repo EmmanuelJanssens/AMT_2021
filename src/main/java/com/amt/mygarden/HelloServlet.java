@@ -1,8 +1,9 @@
-package com.amt.myGarden.myGarden;
+
+package com.amt.mygarden;
 
 import java.io.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 
 @WebServlet("/helloServlet")
 public class HelloServlet extends HttpServlet {
