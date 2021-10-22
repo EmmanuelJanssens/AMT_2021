@@ -137,7 +137,7 @@ The main architectural style is Onion.
 
 ### Design Pattern
 
-The pattern that is foing to be used is the MVC Pattern. MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate application's concerns.
+The pattern that is going to be used is the MVC Pattern. MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate application's concerns.
 
 Model - Model represents an object carrying data. It can also have logic to update controller if its data changes.
 
