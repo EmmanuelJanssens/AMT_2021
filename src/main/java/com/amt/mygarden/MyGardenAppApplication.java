@@ -8,14 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Configuration
 @SpringBootApplication
-@Component
 public class MyGardenAppApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
@@ -32,6 +28,7 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
        repository.save(new Fruit("Apple"));
         };
     }
+
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

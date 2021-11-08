@@ -21,6 +21,8 @@
                                     <li><a href="#fruits">Fruits</a></li>
                                     <li><a href="#blog">Blog</a></li>
                                     <li><a href="#contact">Contact Us</a></li>
+                                    <!--TODO display only if logged in a s admin-->
+                                    <li><a href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a></li>
                                 </ul>
                             </nav>
                         </div>
