@@ -34,14 +34,8 @@
     <%--        </script>--%>
     </jsp:attribute>
   <jsp:body>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+      <h1>Dashboard</h1>
 
   </jsp:body>
 </tag:layout>
