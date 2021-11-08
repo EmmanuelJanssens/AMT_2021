@@ -31,4 +31,7 @@ public class Fruit {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int compareTo(Fruit fruit){return this.id.compareTo(fruit.id);}
 }
+
