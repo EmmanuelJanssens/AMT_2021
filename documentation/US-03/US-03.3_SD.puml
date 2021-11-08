@@ -1,0 +1,48 @@
+@startuml
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User as Actor
+participant "/fruit" as UI <<presentation>>
+control AddFruitSpecificController as Controller <<application>>
+participant "UserSession" as UserSession <<value object>>
+participant "kart:Kart" as Domain <<domain>>
+database FruitRepository as FS <<repository>>
+database KartRepository as KS <<repository>>
+
+
+Actor --> UI: Add fruit to kart
+activate UI
+         UI -> Controller: getFruitById(String name)
+      activate Controller
+
+       Controller->FS : getFruitById(String name)
+       activate FS
+       deactivate FS
+       deactivate Controller
+       UI -> UI : show()
+    UI --> Actor: Shows fruit tab
+    Actor --> UI: Choses quantity and clicks button to add to kart
+
+   UI -> Controller: addFruitToKartWithQuantity(Fruit fruit, int quantity)
+ activate Controller
+        Controller -> KS : kart=getKartById(String token)
+        activate KS
+        deactivate KS
+       Controller -> Domain :  addFruitWithQuantity(Fruit fruit, int quantity)
+       activate Domain
+       deactivate Domain
+       deactivate Controller
+
+UI -> KS : save(kart)
+activate KS
+deactivate KS
+
+
+UI -> UI : show()
+ UI --> Actor: Several Fruits are added and kart is updated
+deactivate UI
+@enduml
