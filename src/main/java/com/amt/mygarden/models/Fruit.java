@@ -1,17 +1,26 @@
 package com.amt.mygarden.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
+@Data
 @Entity // This tells Hibernate to make a table out of this class
 public class Fruit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //private Long id;
+    @Id
     private String name;
+    private float price;
+    private int quantity;
+    @ManyToMany
+    private Set<Category> categories = new HashSet<>();
+    private String image;
 
     public Fruit(String name) {
         if(name.isEmpty())
@@ -20,15 +29,9 @@ public class Fruit {
         setName(name);
     }
 
-    private Fruit() {
-        //ORM
-    }
+    public Fruit() {}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void addCategory(Category c){
+        this.categories.add(c);
     }
 }
