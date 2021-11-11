@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <tag:layout>
     <jsp:attribute name="css">
 <%--        all custom css for this page goes here--%>
@@ -55,25 +56,40 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                    <form action="${pageContext.request.contextPath}/demo/add" method="POST">
+                    <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
+                    <form:form action="${pageContext.request.contextPath}/fruits/add" method="POST" modelAttribute="fruit">
+                        <!--TODO change to file-->
                         <div class="form-group">
-                            <label for="fruitName">Fruit name</label>
-                            <input type="text" class="form-control" id="fruitName" aria-describedby="fruitName" placeholder="Name">
+                            <form:label for="fruitName" path="image">Fruit name</form:label>
+                            <form:input type="text" class="form-control" id="fruitImage" aria-describedby="fruitImage" placeholder="Image" path="image"/>
                         </div>
                         <div class="form-group">
-                            <label for="fruitAmount">Fruit amount</label>
-                            <input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="Amount">
+                            <form:label for="fruitName" path="name">Fruit name</form:label>
+                            <form:input type="text" class="form-control" id="fruitName" aria-describedby="fruitName" placeholder="Name" path="name" required=""/>
                         </div>
                         <div class="form-group">
-                            <label for="fruitDescription">Fruit Description</label>
-                            <textarea type="" class="form-control" id="fruitDescription" aria-describedby="fruitDesc" placeholder="Description"></textarea>
+                            <form:label for="fruitPrice" path="price">Fruit price</form:label>
+                            <form:input type="text" class="form-control" id="fruitPrice" aria-describedby="fruitPrice" placeholder="Price" path="price" required=""/>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <form:label for="fruitAmount" path="quantity">Fruit amount</form:label>
+                            <form:input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="quantity" path="quantity" required=""/>
+                        </div>
+                        <div class="form-group">
+                            <form:label for="fruitAmount" path="categories">Fruit category</form:label>
+                            <form:select class="form-select" name="categories" id="categories" path="categories">
+                                <form:option value="Exotic">Exotic</form:option>
+                                <form:option value="Citrus">Citrus</form:option>
+                                <form:option value="Berry">Berry</form:option>
+                            </form:select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form:form>
                   </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add</button>
-                  </div>
+
               </div>
       </div>
 
