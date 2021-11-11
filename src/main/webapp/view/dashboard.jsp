@@ -25,8 +25,6 @@
     <%--            console.log("my script example")--%>
     <%--        </script>--%>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"/>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     </jsp:attribute>
   <jsp:attribute name="bottomScrips">
     <%--        all scripts that need to be place in the bottom of body--%>
@@ -37,29 +35,47 @@
     <%--        </script>--%>
     </jsp:attribute>
   <jsp:body>
-      <div class="header">
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                      <div class="full">
-                          <div class="center-desk">
-                              <div class="logo"> <a href="index.jsp"><img src="images/logo.png" alt="#"></a> </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                      <div class="menu-area">
-                          <div class="limit-box">
-                              <nav class="main-menu">
-                                  <ul class="menu-area-main">
-                                      <li class="active"><a href="#" onclick="openDialog()">Add a fruit</a></li>
-                                  </ul>
-                              </nav>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+
+      <div class="container row">
+          <div class = "col-sm-6">
+                  <button type="button" class="col-sm-12 btn-primary" data-toggle="modal" data-target="#addfruit">
+                      Add Fruit
+                  </button>
+                  <button type="button" class="col-sm-12 btn-primary">Delete Fruit</button>
           </div>
       </div>
+
+      <div class="modal fade" id="addfruit" tabindex="-1" role="dialog" aria-labelledby="addfruit" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="addFruitTitle">Add a fruit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="fruitName">Fruit name</label>
+                            <input type="text" class="form-control" id="fruitName" aria-describedby="fruitName" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="fruitAmount">Fruit name</label>
+                            <input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="Amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="fruitDescription">Fruit name</label>
+                            <textarea type="" class="form-control" id="fruitDescription" aria-describedby="fruitDesc" placeholder="Description"></textarea>
+                        </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add</button>
+                  </div>
+              </div>
+      </div>
+
   </jsp:body>
 </tag:layout>
