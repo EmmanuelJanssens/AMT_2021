@@ -55,17 +55,17 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                    <form>
+                    <form action="${pageContext.request.contextPath}/demo/add" method="POST">
                         <div class="form-group">
                             <label for="fruitName">Fruit name</label>
                             <input type="text" class="form-control" id="fruitName" aria-describedby="fruitName" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label for="fruitAmount">Fruit name</label>
+                            <label for="fruitAmount">Fruit amount</label>
                             <input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="Amount">
                         </div>
                         <div class="form-group">
-                            <label for="fruitDescription">Fruit name</label>
+                            <label for="fruitDescription">Fruit Description</label>
                             <textarea type="" class="form-control" id="fruitDescription" aria-describedby="fruitDesc" placeholder="Description"></textarea>
                         </div>
                     </form>
