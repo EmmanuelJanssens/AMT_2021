@@ -17,6 +17,8 @@
       <%--                color: white;--%>
       <%--            }--%>
       <%--        </style>--%>
+
+
     </jsp:attribute>
   <jsp:attribute name="scripts">
 <%--        all scripts that need to be place in head goes here--%>
@@ -25,7 +27,11 @@
     <%--        <script>--%>
     <%--            console.log("my script example")--%>
     <%--        </script>--%>
-
+      <script>
+          $(document).ready(function() {
+            $('select').niceSelect();
+    });
+      </script>
     </jsp:attribute>
   <jsp:attribute name="bottomScrips">
     <%--        all scripts that need to be place in the bottom of body--%>
@@ -76,12 +82,16 @@
                             <form:input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="quantity" path="quantity" required=""/>
                         </div>
                         <div class="form-group">
-                            <form:label for="fruitAmount" path="categories">Fruit category</form:label>
-                            <form:select class="form-select" name="categories" id="categories" path="categories">
-                                <form:option value="Exotic">Exotic</form:option>
-                                <form:option value="Citrus">Citrus</form:option>
-                                <form:option value="Berry">Berry</form:option>
-                            </form:select>
+                            <form:label for="fruitCategories" path="categories">Fruit category</form:label>
+                            <form:select
+                                    path="categories"
+                                    class="form-control"
+                                    id="fruitCategories"
+                                    items="${allFruitCategories}"
+                                    multiple="true"
+                                    aria-label="multiple select"
+                            />
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
