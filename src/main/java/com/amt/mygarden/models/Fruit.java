@@ -20,9 +20,11 @@ public class Fruit {
         setName(name);
     }
 
-    private Fruit() {
-        //ORM
+
+    public Fruit() {
+
     }
+
 
     public String getName() {
         return name;
