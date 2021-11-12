@@ -12,8 +12,6 @@ import java.util.Set;
 @Entity // This tells Hibernate to make a table out of this class
 public class Fruit {
 
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    //private Long id;
     @Id
     private String name;
     private float price;
@@ -33,5 +31,9 @@ public class Fruit {
 
     public void addCategory(Category c){
         this.categories.add(c);
+    }
+
+    public boolean checkCategory(Category c){
+        return this.categories.contains(c);
     }
 }

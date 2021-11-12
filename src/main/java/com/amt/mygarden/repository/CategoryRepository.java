@@ -1,6 +1,8 @@
 package com.amt.mygarden.repository;
 
 import com.amt.mygarden.models.Category;
+import com.amt.mygarden.models.Fruit;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
