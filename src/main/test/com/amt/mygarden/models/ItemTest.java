@@ -43,5 +43,24 @@ class ItemTest {
     void testGetQuantityFailure(){
         assertNotEquals(2, kart.getQuantity());
     }
-
+    @Test
+    void testAddUniqueFruitSuccess(){
+        kart.addUniqueFruit();
+    assertEquals(2, kart.getQuantity());
+}
+    @Test
+    void testAddUniqueFruitFailure(){
+        kart.addUniqueFruit();
+        assertNotEquals(3, kart.getQuantity());
+    }
+    @Test
+    void testAddSeveralFruitSuccess(){
+        kart.addSeveralFruit(2);
+        assertEquals(3, kart.getQuantity());
+    }
+    @Test
+    void testAddSeveralFruitFailure(){
+        kart.addSeveralFruit(2);
+        assertNotEquals(4, kart.getQuantity());
+    }
 }

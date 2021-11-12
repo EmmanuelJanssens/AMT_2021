@@ -44,4 +44,12 @@ private int quantity;
     public Fruit getFruit() {
         return fruit;
     }
+
+    public void addSeveralFruit(int quantity){
+        this.quantity+=quantity;
+    }
+    public void addUniqueFruit(){
+        this.quantity+=1;
+    }
+
 }
