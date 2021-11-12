@@ -35,4 +35,13 @@ class ItemTest {
         assertNotEquals(orange, kart.getFruit());
     }
 
+    @Test
+    void testGetQuantitySuccess(){
+        assertEquals(1, kart.getQuantity());
+    }
+    @Test
+    void testGetQuantityFailure(){
+        assertNotEquals(2, kart.getQuantity());
+    }
+
 }
