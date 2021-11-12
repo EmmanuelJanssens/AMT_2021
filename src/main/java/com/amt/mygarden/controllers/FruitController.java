@@ -34,9 +34,9 @@ public class FruitController {
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody Optional<Fruit> getFruit(@PathVariable long id) {
+    public @ResponseBody Optional<Fruit> getFruit(@PathVariable String id) {
         // This returns a JSON or XML with the users
-        return fruitRepository.findById((int) id);
+        return fruitRepository.findById(id);
     }
 }
 /*
