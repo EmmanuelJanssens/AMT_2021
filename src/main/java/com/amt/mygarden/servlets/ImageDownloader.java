@@ -1,4 +1,4 @@
-package com.amt.mygarden.controllers;
+package com.amt.mygarden.servlets;
 
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
