@@ -36,7 +36,7 @@
                             <a href="${pageContext.request.contextPath}/helloServlet">Hello Servlet</a>
                             <a href="${pageContext.request.contextPath}/fruits">Get all fruits</a>
                             <a href="${pageContext.request.contextPath}/fruits/Banana">Get a specific fruit</a>
-                            <a href="${pageContext.request.contextPath}/fruits/Category/Exotic">Get all fruits from a specific category</a>
+                            <a href="${pageContext.request.contextPath}/fruits/category/Exotic">Get all fruits from a specific category</a>
                             <p>The bestest apple in amt</p>
                             <div class="button_section"><a class="main_bt" href="#">Buy Now</a></div>
                         </div>
