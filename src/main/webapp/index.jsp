@@ -34,7 +34,9 @@
                         <div class="full">
                             <h1><strong class="cur">Best</strong><br>Fresh Red Apple</h1>
                             <a href="${pageContext.request.contextPath}/helloServlet">Hello Servlet</a>
-                            <a href="${pageContext.request.contextPath}/demo/all">Get all fruits</a>
+                            <a href="${pageContext.request.contextPath}/fruits">Get all fruits</a>
+                            <a href="${pageContext.request.contextPath}/fruits/Banana">Get a specific fruit</a>
+                            <a href="${pageContext.request.contextPath}/fruits/category/Exotic">Get all fruits from a specific category</a>
                             <p>The bestest apple in amt</p>
                             <div class="button_section"><a class="main_bt" href="#">Buy Now</a></div>
                         </div>

@@ -20,7 +20,7 @@ public class FruitService {
     // update
 
     // TODO throw ResourceNotFound
-    public Fruit getASingleFruit(Integer fruitId) throws Exception{
+    public Fruit getASingleFruit(String fruitId) throws Exception{
         return fruitRepository.findById(fruitId).orElseThrow(() -> new Exception("fruit not found"));
     }
 
