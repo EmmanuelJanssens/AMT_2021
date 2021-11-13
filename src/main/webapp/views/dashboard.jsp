@@ -57,38 +57,45 @@
 
       </div>
 
-      <div id="fruits" class="section dark_bg ">
-
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="heading full text_align_center">
-                      <h2 class="white_font full text_align_center">Our Fruits</h2>
+      <div id="fruits" class="section dark_bg layout_padding ">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="heading full text_align_center">
+                          <h2 class="white_font full text_align_center">Our Fruits</h2>
+                      </div>
                   </div>
               </div>
-          </div>
-          <table class="table">
-              <thead>
+              <table class="table">
+                  <thead>
                   <tr>
-                      <th colspan="5">
+                      <th colspan="6">
                           <button type="button" class="col-sm-12 btn-primary" data-toggle="modal" data-target="#addfruit" onclick="changeContent()">
                               Add Fruit
                           </button>
                       </th>
                   </tr>
                   <tr>
+                      <th scope="col">image</th>
                       <th scope="col">name</th>
                       <th scope="col">price</th>
                       <th scope="col">quantity</th>
                       <th scope="col">description</th>
                       <th scope="col">delete</th>
                   </tr>
-              </thead>
-              <tbody>
+                  </thead>
+                  <tbody>
 
 
-                  <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
-              <c:forEach var="fruit" items="${allFruits}">
+                      <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
+                  <c:forEach var="fruit" items="${allFruits}">
                       <tr>
+                          <td><img
+                                  style="display: block"
+                                  src="${pageContext.request.contextPath}/download?filename=${fruit.name}${fruit.image}" alt="image"
+                                  width="10%"
+                                  height="10%"
+                          /> </td>
                           <td class="white_font"><strong>${fruit.name}</strong></td>
                           <td class="white_font">${fruit.price}</td>
                           <td class="white_font">${fruit.quantity}</td>
@@ -96,11 +103,14 @@
                           <td>
                               <span aria-hidden="true" >&times;</span>
                           </td>
-                      </tr>
-              </c:forEach>
 
-              </tbody>
-          </table>
+                      </tr>
+                  </c:forEach>
+
+                  </tbody>
+              </table>
+          </div>
+
       </div>
 
 
