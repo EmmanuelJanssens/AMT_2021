@@ -21,11 +21,18 @@ public class MainController {
     @GetMapping(value = "/dashboard")
     public String viewDashboard(Model model){
 
-        model.addAttribute("fruit",new Fruit());
-        model.addAttribute("allFruitCategories",categories.findAll());
         model.addAttribute("allFruits",fruits.findAll());
 
         return "dashboard";
     }
 
+    @GetMapping(value = "/addFruitModal")
+    public String openDialogBox(Model model){
+
+        Fruit fruit = new Fruit();
+        model.addAttribute("fruit",fruit);
+        model.addAttribute("allFruitCategories",categories.findAll());
+
+        return "addFruitModal";
+    }
 }

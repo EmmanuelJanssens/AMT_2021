@@ -47,7 +47,6 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
             f1.setQuantity(10);
             f1.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f1.setImage("imageURL");
-
             f2.setName("Banana");
             f2.setPrice(0.90f);
             f2.setQuantity(40);

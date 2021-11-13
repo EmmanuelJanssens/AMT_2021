@@ -17,8 +17,8 @@ public class Fruit {
     private int quantity;
     @ManyToMany
     private Set<Category> categories = new HashSet<>();
-    private String image;
-    private String description;
+    private String image="";
+    private String description= "";
     @Transient
     MultipartFile imageFile;
 
