@@ -1,15 +1,14 @@
 package com.amt.mygarden.repository;
 
 import com.amt.mygarden.models.Category;
+import com.amt.mygarden.models.Fruit;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import com.amt.mygarden.models.Fruit;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FruitRepository extends CrudRepository<Fruit, String>{
+public interface CategoryRepository extends CrudRepository<Category, String> {
 
-    Iterable<Fruit> findFruitsByCategoriesContaining(Category c);
+    Category findCategoryByName(String s);
 
 }
