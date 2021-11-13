@@ -59,7 +59,7 @@
                   </div>
                   <div class="modal-body">
                     <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
-                    <form:form action="${pageContext.request.contextPath}/fruits/add" method="POST" modelAttribute="fruit" enctype="multipart/form-data">
+                    <form:form action="${pageContext.request.contextPath}/fruits/" method="POST" modelAttribute="fruit" enctype="multipart/form-data">
                         <!--TODO change to file-->
                         <div class="form-group">
                             <form:label for="fruitName" path="image">Fruit name</form:label>
