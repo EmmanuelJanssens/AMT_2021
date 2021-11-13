@@ -3,9 +3,7 @@ package com.amt.mygarden.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 @Data
@@ -31,9 +29,5 @@ public class Fruit {
 
     public void addCategory(Category c){
         this.categories.add(c);
-    }
-
-    public boolean checkCategory(Category c){
-        return this.categories.contains(c);
     }
 }

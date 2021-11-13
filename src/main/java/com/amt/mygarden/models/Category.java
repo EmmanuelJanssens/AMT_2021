@@ -11,11 +11,9 @@ import java.util.Set;
 @Data
 @Entity
 public class Category {
+
     @Id
     private String name;
-
-    @ManyToMany
-    private Set<Fruit> fruits = new HashSet<>();
 
     public Category(){}
 
