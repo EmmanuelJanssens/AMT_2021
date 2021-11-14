@@ -1,6 +1,7 @@
 package com.amt.mygarden.models;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,7 +18,10 @@ public class Fruit {
 
     @ManyToMany
     private Set<Category> categories = new HashSet<>();
-    private String image;
+    private String image="";
+    private String description= "";
+    @Transient
+    MultipartFile imageFile;
 
     public Fruit(String name) {
         if(name.isEmpty())

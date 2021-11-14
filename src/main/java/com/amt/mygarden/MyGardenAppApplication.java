@@ -12,14 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Configuration
 @SpringBootApplication
-@Component
 public class MyGardenAppApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
@@ -54,7 +50,6 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
 
             f1.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f1.setImage("imageURL");
-
             f2.setName("Banana");
             f2.setPrice(0.90f);
             f2.setQuantity(40);
@@ -99,6 +94,7 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
 
         };
     }
+
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
