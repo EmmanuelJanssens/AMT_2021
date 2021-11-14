@@ -43,7 +43,7 @@
           const url = "${pageContext.request.contextPath}/fruits/description/"
 
           function changeContent() {
-              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/addFruitModal',function (){
+              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/openFruitModal',function (){
                   $('#addfruit').modal('show');
               });
           }
@@ -135,7 +135,7 @@
                       <tr>
                           <td><img
                                   style="display: block"
-                                  src="${pageContext.request.contextPath}/download?filename=${fruit.name}${fruit.image}" alt="image"
+                                  src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
                                   width="10%"
                                   height="10%"
                           /> </td>
