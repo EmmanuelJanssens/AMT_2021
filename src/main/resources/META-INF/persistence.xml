@@ -6,5 +6,6 @@
     <persistence-unit name="default">
         <class>com.amt.mygarden.models.Fruit</class>
         <class>com.amt.mygarden.models.Category</class>
+        <class>com.amt.mygarden.models.Item</class>
     </persistence-unit>
 </persistence>

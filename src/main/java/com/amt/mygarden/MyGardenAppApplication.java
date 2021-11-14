@@ -2,8 +2,10 @@ package com.amt.mygarden;
 
 import com.amt.mygarden.models.Category;
 import com.amt.mygarden.models.Fruit;
+import com.amt.mygarden.models.Item;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.repository.FruitRepository;
+import com.amt.mygarden.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +27,7 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
         SpringApplication.run(MyGardenAppApplication.class, args);
     }
     @Bean
-    public CommandLineRunner run(FruitRepository fruitRepository, CategoryRepository categoryRepository) throws Exception {
+    public CommandLineRunner run(FruitRepository fruitRepository, CategoryRepository categoryRepository, ItemRepository itemRepository) throws Exception {
         return (String[] args) -> {
 
             // Categories
@@ -48,30 +50,29 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
 
             f1.setName("Orange");
             f1.setPrice(2.00f);
-            f1.setQuantity(10);
+
             f1.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f1.setImage("imageURL");
 
             f2.setName("Banana");
             f2.setPrice(0.90f);
-            f2.setQuantity(40);
+
             f2.addCategory(categoryRepository.findById("Exotic").orElse(null));
             f2.setImage("imageURL");
 
             f3.setName("Pineapple");
             f3.setPrice(4.50f);
-            f3.setQuantity(40);
             f3.addCategory(categoryRepository.findById("Exotic").orElse(null));
             f3.setImage("imageURL");
 
             f4.setName("Apple");
             f4.setPrice(1.00f);
-            f4.setQuantity(20);
+
             f4.setImage("imageURL");
 
             f5.setName("Yuzu");
             f5.setPrice(4.00f);
-            f5.setQuantity(15);
+
             f5.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f5.addCategory(categoryRepository.findById("Exotic").orElse(null));
             f5.setImage("imageURL");
@@ -81,6 +82,15 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
             fruitRepository.save(f3);
             fruitRepository.save(f4);
             fruitRepository.save(f5);
+
+            //Item
+            Item i1=new Item("admin",f1,1);
+            Item i2=new Item("admin",f2,2);
+            Item i3=new Item("admin",f3,3);
+            itemRepository.save(i1);
+            itemRepository.save(i2);
+            itemRepository.save(i3);
+
         };
     }
 

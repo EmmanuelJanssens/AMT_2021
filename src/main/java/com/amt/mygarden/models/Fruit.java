@@ -13,7 +13,6 @@ public class Fruit {
     @Id
     private String name;
     private float price;
-    private int quantity;
     @ManyToMany
     private Set<Category> categories = new HashSet<>();
     private String image;
