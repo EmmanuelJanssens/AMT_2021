@@ -46,7 +46,7 @@ public class FruitController {
 
     // update the values of a fruit
     @PutMapping(path = "/{id}")
-    public String update(@PathVariable Long id, @RequestBody Fruit fruit) {
+    public String update(@PathVariable int id, @RequestBody Fruit fruit) {
         return "updated fruit";
     }
 
