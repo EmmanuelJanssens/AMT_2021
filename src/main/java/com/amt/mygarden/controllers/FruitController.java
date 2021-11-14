@@ -5,6 +5,8 @@ import com.amt.mygarden.payloads.FruitRequest;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.repository.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -59,11 +61,17 @@ public class FruitController {
         fruitRepository.save(fruit);
         return redirectView;
     }
+
+    @GetMapping("description/{value}")
+    public ResponseEntity<Boolean> descriptionAlreadyExists(@PathVariable String value)
+    {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body( fruitRepository.existsByDescription(value));
+    }
+
     @GetMapping
     public @ResponseBody Iterable<Fruit> getAllFruits() {
 
         // This returns a JSON or XML with the users
-
         return fruitRepository.findAll();
     }
 
