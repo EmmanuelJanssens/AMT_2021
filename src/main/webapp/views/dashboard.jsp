@@ -39,8 +39,11 @@
     <%--        </script>--%>
 
       <script>
+
+          const url = "${pageContext.request.contextPath}/fruits/description/"
+
           function changeContent() {
-              $('#addFruitForm').load('${pageContext.request.contextPath}/addFruitModal',function (){
+              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/openFruitModal',function (){
                   $('#addfruit').modal('show');
               });
           }
@@ -48,12 +51,52 @@
               $('#addfruit').remove();
               $('div').remove(".modal-backdrop");
           }
+
+          function checkDescriptionValidity(url,description)
+          {
+              $.get(url+description,function(data){
+                  console.log(data)
+                  if(data===true)
+                  {
+                      $("#exists").text("Already exists")
+                      $("#exists").addClass('alert alert-dark')
+                      return false
+                  }
+                  else
+                  {
+                      $("#exists").removeClass('alert alert-dark')
+                      $("#exists").text("")
+                      return true;
+                  }
+              });
+
+              return false
+          }
+          <%--@elvariable id="fruitObj" type="com.amt.mygarden.models.Fruit"--%>
+          function addFruit(url){
+                const description = $("#fruitDescription").val()
+              if(!checkDescriptionValidity(url,description))
+                  return false;
+              $.get(url+description,function(data){
+                  {
+                      if($("#addFruitForm").isValid())
+                      {
+                          $("#addFruitForm").submit()
+                      }
+                  }
+              })
+          }
+
+          $("#addFruitForm").submit(function(e){
+              return false
+          });
+
       </script>
     </jsp:attribute>
   <jsp:body>
 
 
-      <div id="addFruitForm">
+      <div id="addFruitFormWrapper">
 
       </div>
 
@@ -92,7 +135,7 @@
                       <tr>
                           <td><img
                                   style="display: block"
-                                  src="${pageContext.request.contextPath}/download?filename=${fruit.name}${fruit.image}" alt="image"
+                                  src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
                                   width="10%"
                                   height="10%"
                           /> </td>

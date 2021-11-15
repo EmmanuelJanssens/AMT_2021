@@ -2,31 +2,35 @@ package com.amt.mygarden.controllers;
 
 import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.CategoryRepository;
-import com.amt.mygarden.repository.FruitRepository;
+import com.amt.mygarden.service.FruitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 
 @Controller
-public class MainController {
+@RequestMapping(path="/dashboard")
+public class DashBoardController {
 
     @Autowired
     CategoryRepository categories;
 
     @Autowired
-    FruitRepository fruits;
+    FruitService fruits;
 
-    @GetMapping(value = "/dashboard")
+
+
+    @GetMapping
     public String viewDashboard(Model model){
 
-        model.addAttribute("allFruits",fruits.findAll());
-
+        model.addAttribute("allFruits",fruits.getAllFruits());
         return "dashboard";
     }
 
-    @GetMapping(value = "/addFruitModal")
+    @GetMapping(value = "/openFruitModal")
     public String openDialogBox(Model model){
 
         Fruit fruit = new Fruit();

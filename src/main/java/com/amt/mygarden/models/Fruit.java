@@ -1,5 +1,6 @@
 package com.amt.mygarden.models;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 public class Fruit {
 
     @Id
+    @NotNull
     private String name;
     private float price;
     private int quantity;
