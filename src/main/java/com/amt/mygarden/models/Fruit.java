@@ -1,26 +1,29 @@
 package com.amt.mygarden.models;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 @Data
 @Entity // This tells Hibernate to make a table out of this class
 public class Fruit {
 
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    //private Long id;
     @Id
+    @NotNull
     private String name;
     private float price;
     private int quantity;
+
     @ManyToMany
     private Set<Category> categories = new HashSet<>();
-    private String image;
+    private String image="";
+    private String description= "";
+    @Transient
+    MultipartFile imageFile;
 
     public Fruit(String name) {
         if(name.isEmpty())
