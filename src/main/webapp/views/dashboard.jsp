@@ -39,11 +39,8 @@
     <%--        </script>--%>
 
       <script>
-
-          const url = "${pageContext.request.contextPath}/fruits/description/"
-
           function changeContent() {
-              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/openFruitModal',function (){
+              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/open-fruit-modal',function (){
                   $('#addfruit').modal('show');
               });
           }
