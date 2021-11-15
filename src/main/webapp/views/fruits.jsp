@@ -1,12 +1,5 @@
 <%@ page import="com.amt.mygarden.repository.FruitRepository" %>
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %><%--
-  Created by IntelliJ IDEA.
-  User: manuc
-  Date: 13/11/2021
-  Time: 23:33
-  To change this template use File | Settings | File Templates.
---%>
-
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

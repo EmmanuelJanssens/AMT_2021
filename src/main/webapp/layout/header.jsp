@@ -20,7 +20,7 @@
                                     <li><a href="#about">About Us</a></li>
                                     <li><a href="${pageContext.request.contextPath}/fruits">fruits ${pageContext.request.contextPath}</a></li>
                                     <li><a href="#blog">Blog</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/cart">cart ${pageContext.request.contextPath}</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/carts/my-cart">cart ${pageContext.request.contextPath}</a></li>
                                     <li><a href="#contact">Contact Us</a></li>
                                     <!--TODO display only if logged in a s admin-->
                                     <li><a href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a></li>
