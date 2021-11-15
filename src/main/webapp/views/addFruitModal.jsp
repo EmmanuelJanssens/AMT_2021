@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: emman
@@ -17,7 +18,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form:form action="${pageContext.request.contextPath}/fruits/" method="POST" modelAttribute="fruit" enctype="multipart/form-data">
+        <form:form action="${pageContext.request.contextPath}/fruits/" method="POST" modelAttribute="fruit" enctype="multipart/form-data" id="addFruitForm">
         <!--TODO change to file-->
         <div class="form-group">
           <form:label for="fruitName" path="image">Fruit name</form:label>
@@ -37,11 +38,11 @@
         </div>
         <div class="form-group">
           <form:label for="fruitDescription" path="description">Fruit amount</form:label>
-          <form:textarea type="text" class="form-control" id="fruitDescription" aria-describedby="fruitDescription" placeholder="description" path="description" required="true"/>
+          <form:textarea type="text" class="form-control" id="fruitDescription" aria-describedby="fruitDescription" name="description" placeholder="description" path="description" required="true"/>
+          <p id="exists"></p>
         </div>
         <div class="form-group">
           <div class="form-group">
-
             <form:label for="fruitCategories" path="categories">Fruit category</form:label>
             <form:select
                     path="categories"
@@ -55,7 +56,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeDialog()">Close</button>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" id="addFruitBtn" class="btn btn-primary" onclick="addFruit('<c:out value="${pageContext.request.contextPath}/fruits/description/"/>')">Add</button>
           </div>
           </form:form>
         </div>
