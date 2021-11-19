@@ -84,6 +84,10 @@
               })
           }
 
+          function deleteFruit(url){
+              
+          }
+
           $("#addFruitForm").submit(function(e){
               return false
           });
@@ -141,7 +145,7 @@
                           <td class="white_font">${fruit.quantity}</td>
                           <td class="white_font">${fruit.description}</td>
                           <td>
-                              <span aria-hidden="true" >&times;</span>
+                              <button onclick="deleteFruit(/fruits/${fruit.name})">Delete</button>
                           </td>
 
                       </tr>
