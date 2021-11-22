@@ -1,67 +1,148 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: emman
-  Date: 13/11/2021
-  Time: 16:54
+  Date: 08/11/2021
+  Time: 10:11
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<tag:layout>
+    <jsp:attribute name="css">
+<%--        all custom css for this page goes here--%>
+        <%--        example: --%>
+        <%--        <link rel="stylesheet" href="css_file">--%>
+        <%--        <style>--%>
+        <%--            h1 {--%>
+        <%--                color: white;--%>
+        <%--            }--%>
+        <%--        </style>--%>
 
-<div class="modal fade" id="addfruit" tabindex="1" role="dialog" aria-labelledby="addfruit" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addFruitTitle">Add a fruit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" onclick="closeDialog()" >&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form:form action="${pageContext.request.contextPath}/fruits/" method="POST" modelAttribute="fruit" enctype="multipart/form-data" id="addFruitForm">
-        <!--TODO change to file-->
-        <div class="form-group">
-          <form:label for="fruitName" path="image">Fruit name</form:label>
-          <form:input type="file" class="form-control" id="fruitImage" aria-describedby="fruitImage" placeholder="Image" path="imageFile"/>
-        </div>
-        <div class="form-group">
-          <form:label for="fruitName" path="name">Fruit name</form:label>
-          <form:input type="text" class="form-control" id="fruitName" aria-describedby="fruitName" placeholder="Name" path="name" required="true"/>
-        </div>
-        <div class="form-group">
-          <form:label for="fruitPrice" path="price">Fruit price</form:label>
-          <form:input type="text" class="form-control" id="fruitPrice" aria-describedby="fruitPrice" placeholder="Price" path="price" required="true"/>
-        </div>
-        <div class="form-group">
-          <form:label for="fruitAmount" path="quantity">Fruit amount</form:label>
-          <form:input type="text" class="form-control" id="fruitAmount" aria-describedby="fruitAmount" placeholder="quantity" path="quantity" required="true"/>
-        </div>
-        <div class="form-group">
-          <form:label for="fruitDescription" path="description">Fruit amount</form:label>
-          <form:textarea type="text" class="form-control" id="fruitDescription" aria-describedby="fruitDescription" name="description" placeholder="description" path="description" required="true"/>
-          <p id="exists"></p>
-        </div>
-        <div class="form-group">
-          <div class="form-group">
-            <form:label for="fruitCategories" path="categories">Fruit category</form:label>
-            <form:select
-                    path="categories"
-                    class="form-control"
-                    id="fruitCategories"
-                    items="${allFruitCategories}"
-                    multiple="true"
-                    aria-label="multiple select"
-            />
-          </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeDialog()">Close</button>
-            <button type="submit" id="addFruitBtn" class="btn btn-primary" onclick="addFruit('<c:out value="${pageContext.request.contextPath}/fruits/description/"/>')">Add</button>
-          </div>
-          </form:form>
+    </jsp:attribute>
+    <jsp:attribute name="scripts">
+<%--        all scripts that need to be place in head goes here--%>
+        <%--        example: --%>
+        <%--        <script src="js_file"></script>--%>
+        <%--        <script>--%>
+        <%--            console.log("my script example")--%>
+        <%--        </script>--%>
+
+    </jsp:attribute>
+    <jsp:attribute name="bottomScrips">
+    <%--        all scripts that need to be place in the bottom of body--%>
+        <%--        example: --%>
+        <%--        <script src="js_file"></script>--%>
+        <%--        <script>--%>
+        <%--            console.log("my script example")--%>
+        <%--        </script>--%>
+        <script>
+            const alert = $("#exists")
+            const description = $('#fruitDescription')
+            const form = $("#addFruitForm")
+            async function AddIfDescNotExist() {
+                if (form.valid()) {
+                    await $.get("${pageContext.request.contextPath}/fruits/description/" + description.val(), function (data) {
+                        if (data.length > 0) {
+                            alert.text(data[0].name + " Has allready the same description")
+                            alert.addClass('alert alert-dark')
+                        } else {
+                            alert.removeClass('alert alert-dark')
+                            alert.text("")
+                            form.submit()
+                        }
+                    });
+                }
+            }
+        </script>
+    </jsp:attribute>
+    <jsp:body>
+
+
+        <div class="container">
+            <div>
+                <h5 d="addFruitTitle">Add a fruit</h5>
+            </div>
+            <form:form action="${pageContext.request.contextPath}/fruits/"
+                       method="POST"
+                       modelAttribute="fruit"
+                       enctype="multipart/form-data"
+                       id="addFruitForm"
+                       class="well form-horizontal"
+            >
+                <!--TODO change to file-->
+                <div class="form-group form-inline">
+                    <form:label for="fruitName" class="col-md-4 control-label" path="image">Fruit Image</form:label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <form:input type="file" class="form-control" id="fruitImage" aria-describedby="fruitImage"
+                                        placeholder="Image" path="imageFile"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <form:label for="fruitName" class="col-md-4 control-label" path="name">Fruit name</form:label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <form:input name="fruitName" placeholder="Name" class="form-control" type="text" path="name"
+                                        required="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <form:label for="fruitPrice" class="col-md-4 control-label" path="price">Fruit price</form:label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <form:input name="fruitPrice" placeholder="price" class="form-control" type="text"
+                                        path="price"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <form:label for="fruitAmount" class="col-md-4 control-label"
+                                path="quantity">Fruit quantity</form:label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <form:input name="fruitAmount" placeholder="Amount" class="form-control" type="text"
+                                        path="quantity"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <form:label for="fruitDescription" class="col-md-4 control-label"
+                                path="description">Fruit description</form:label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <form:textarea name="fruitDescription" id="fruitDescription" placeholder="Description"
+                                           class="form-control" type="text" path="description" required="true"/>
+                        </div>
+                        <p id="exists"></p>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <form:label for="fruitCategories" class="col-md-4 control-label"
+                                path="categories">Fruit category</form:label>
+                    <form:select
+                            path="categories"
+                            class="form-control"
+                            id="fruitCategories"
+                            items="${allFruitCategories}"
+                            multiple="true"
+                            aria-label="multiple select"
+                    />
+                </div>
+                <div class="form-group form-inline">
+                    <input type="button" class="btn btn-secondary" onclick="location.href='/dashboard'" value="Close"/>
+                    <input type="button" id="addFruitBtn" class="btn btn-primary" onclick="AddIfDescNotExist()" value="Add"/>
+                </div>
+            </form:form>
         </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+    </jsp:body>
+</tag:layout>

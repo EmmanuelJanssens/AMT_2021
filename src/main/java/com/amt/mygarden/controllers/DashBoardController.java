@@ -8,15 +8,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Controller
-@RequestMapping(path="/dashboard")
+@RequestMapping("/dashboard")
 public class DashBoardController {
+
+
+
 
     @Autowired
     CategoryRepository categories;
 
     @Autowired
     FruitService fruits;
+
+
+
 
     @GetMapping
     public String viewDashboard(Model model){
@@ -25,8 +33,8 @@ public class DashBoardController {
         return "dashboard";
     }
 
-    @GetMapping(value = "/open-fruit-modal")
-    public String openDialogBox(Model model){
+    @GetMapping(value = "/add")
+    public String openFruitForm(Model model){
 
         Fruit fruit = new Fruit();
         model.addAttribute("fruit",fruit);
