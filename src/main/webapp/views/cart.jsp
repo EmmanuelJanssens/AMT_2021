@@ -24,10 +24,20 @@
                                 <div>${item.fruit.description}</div>
                                 <p class="text-muted">${item.fruit.price} CHF</p>
                                 <p class="text-muted">${item.quantity}</p>
+                                <p>
+                                    <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> -</button>
+                                    <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> +</button>
+                                </p>
+                                <p>
+                                    <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> Remove</button>
+                                </p>
                             </div>
                         </div>
                         <hr/>
                     </c:forEach>
+                            <p>
+                                <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> Clear Cart</button>
+                            </p>
                 </div>
             </div>
         </div>
