@@ -15,6 +15,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="list-group">
+                        <a href="${pageContext.request.contextPath}/fruits" class="list-group-item list-group-item-action">All</a>
                         <c:forEach items="${categories}" var="category">
                             <a href="${pageContext.request.contextPath}/categories/${category.name}/fruits" class="list-group-item list-group-item-action">${category.name}</a>
                         </c:forEach>

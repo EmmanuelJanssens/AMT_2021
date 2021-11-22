@@ -1,10 +1,8 @@
 package com.amt.mygarden.controllers;
 
 import com.amt.mygarden.models.Category;
-import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.FruitRepository;
 import com.amt.mygarden.service.CategoryService;
-import com.amt.mygarden.service.FruitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
