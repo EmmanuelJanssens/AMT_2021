@@ -27,7 +27,7 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/fruits">fruits ${pageContext.request.contextPath}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/carts/my-cart">cart ${pageContext.request.contextPath}</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/cart">cart ${pageContext.request.contextPath}</a>
                                 </li>
                                 <li class="nav-item">
                                     <!--TODO display only if logged in a s admin-->

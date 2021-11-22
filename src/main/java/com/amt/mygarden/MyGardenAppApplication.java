@@ -85,7 +85,9 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
             fruitRepository.save(f5);
 
             //Item
-            Item i1=new Item("admin",f1,1);
+            // to erase
+            itemRepository.deleteAll();
+            Item i1=new Item("admin",f1,5);
             Item i2=new Item("admin",f2,2);
             Item i3=new Item("admin",f3,3);
             itemRepository.save(i1);
