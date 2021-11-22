@@ -13,6 +13,13 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <c:forEach items="${categories}" var="category">
+                            <a href="#" class="list-group-item list-group-item-action">${category.name}</a>
+                        </c:forEach>
+                    </div>
+                </div>
                 <div class="col-md-9">
                     <c:forEach items="${allFruits}" var="fruit">
                         <a href="/fruits/${fruit.name}" class="row">
