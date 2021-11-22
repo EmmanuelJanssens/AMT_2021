@@ -22,6 +22,9 @@
                     </div>
                 </div>
                 <div class="col-md-9">
+                    <c:if test="${empty(allFruits)}">
+                        No Fruits found for this category
+                    </c:if>
                     <c:forEach items="${allFruits}" var="fruit">
                         <a href="/fruits/${fruit.name}" class="row">
                             <div class="col-sm-4">
