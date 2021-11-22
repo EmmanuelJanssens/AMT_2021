@@ -38,7 +38,7 @@ public class FruitController {
 
     @GetMapping(path="/{id}")
     public String getFruit(@PathVariable String id, Model model) throws Exception {
-        model.addAttribute("f",fruitService.getASingleFruit(id));
+        model.addAttribute("fruit",fruitService.getASingleFruit(id));
         return "fruit";
     }
 }
