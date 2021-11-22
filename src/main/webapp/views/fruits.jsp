@@ -15,15 +15,16 @@
             <div class="row">
                 <div class="col-md-9">
                     <c:forEach items="${allFruits}" var="fruit">
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="${fruit.image}" class="img-responsive"></a>
+                        <a href="/fruits/${fruit.name}" class="row">
+                            <div class="col-sm-4">
+                                <img src="${pageContext.request.contextPath}/download?filename=${fruit.image}" class="img-responsive" alt="">
                             </div>
                             <div class="col-sm-8">
                                 <h3 class="title">${fruit.name}</h3>
                                 <div>${fruit.description}</div>
                                 <p class="text-muted">${fruit.price} CHF</p>
                             </div>
-                        </div>
+                        </a>
                         <hr/>
                     </c:forEach>
                 </div>

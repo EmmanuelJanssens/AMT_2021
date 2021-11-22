@@ -8,7 +8,7 @@
                     <div class="full">
                         <div class="center-desk">
                             <div class="logo">
-                                <a href="index.jsp"><img src="images/logo.png" alt="#"></a>
+                                <a href="index.jsp"><img src="${pageContext.request.contextPath}/images/logo.png" alt="#"></a>
                             </div>
                         </div>
                     </div>
@@ -21,17 +21,17 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="/">Home</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/fruits">fruits ${pageContext.request.contextPath}</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/fruits">fruits</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/carts/my-cart">cart ${pageContext.request.contextPath}</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/carts/my-cart">cart</a>
                                 </li>
                                 <li class="nav-item">
                                     <!--TODO display only if logged in a s admin-->
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard</a>
                                 </li>
                             </ul>
                         </div>
