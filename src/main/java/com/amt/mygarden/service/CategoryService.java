@@ -13,4 +13,8 @@ public class CategoryService {
     public Iterable<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    public Category getCategoryById(String categoryId) throws Exception {
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new Exception("Category not found"));
+    }
 }

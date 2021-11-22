@@ -16,7 +16,7 @@
                 <div class="col-md-2">
                     <div class="list-group">
                         <c:forEach items="${categories}" var="category">
-                            <a href="#" class="list-group-item list-group-item-action">${category.name}</a>
+                            <a href="${pageContext.request.contextPath}/categories/${category.name}/fruits" class="list-group-item list-group-item-action">${category.name}</a>
                         </c:forEach>
                     </div>
                 </div>
