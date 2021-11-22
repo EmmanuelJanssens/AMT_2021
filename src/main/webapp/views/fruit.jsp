@@ -112,6 +112,8 @@
                             </span>
                         </div>
                         <div class="m-bot15"> <strong>Price : </strong> <span class="pro-price">${fruit.price} CHF</span></div>
+                        <%-- todo: implement logic --%>
+                        <!-- start of addToCart -->
                         <div class="form-group">
                             <label>Quantity</label>
                             <input type="quantiy" placeholder="1" class="form-control quantity">
@@ -119,6 +121,7 @@
                         <p>
                             <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                         </p>
+                        <!-- end of addToCart -->
                     </div>
                 </div>
             </section>
