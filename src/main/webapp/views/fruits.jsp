@@ -23,6 +23,9 @@
                                 <h3 class="title">${fruit.name}</h3>
                                 <div>${fruit.description}</div>
                                 <p class="text-muted">${fruit.price} CHF</p>
+                                <p>
+                                    <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </p>
                             </div>
                         </a>
                         <hr/>

@@ -119,7 +119,7 @@
                             <input type="quantiy" placeholder="1" class="form-control quantity">
                         </div>
                         <p>
-                            <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="btn btn-round btn-danger" type="submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                         </p>
                         <!-- end of addToCart -->
                     </div>
