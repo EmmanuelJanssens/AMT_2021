@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-
 @Controller
 @RequestMapping("/dashboard")
 public class DashBoardController {
@@ -40,6 +38,6 @@ public class DashBoardController {
         model.addAttribute("fruit",fruit);
         model.addAttribute("allFruitCategories",categories.findAll());
 
-        return "addFruitModal";
+        return "addFruit";
     }
 }
