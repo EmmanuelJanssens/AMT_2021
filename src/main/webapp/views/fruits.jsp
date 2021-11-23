@@ -17,6 +17,14 @@
                     <c:forEach items="${allFruits}" var="fruit">
                         <a href="/fruits/${fruit.name}" class="row">
                             <div class="col-sm-4">
+                                <c:choose>
+                                    <c:when  test="${fruit.price <= 0}">
+                                        <img src = "${pageContext.request.contextPath}/images/comming-soon.png" alt="" style="position:absolute; top:0; left:0">
+                                    </c:when>
+                                    <c:when  test="${fruit.quantity <= 0}">
+                                        <img src = "${pageContext.request.contextPath}/images/unavailable.png" alt="" style="position:absolute; top:0; left:0">
+                                    </c:when>
+                                </c:choose>
                                 <img src="${pageContext.request.contextPath}/download?filename=${fruit.image}" class="img-responsive" alt="">
                             </div>
                             <div class="col-sm-8">
