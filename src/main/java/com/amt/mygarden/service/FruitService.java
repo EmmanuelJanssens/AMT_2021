@@ -5,14 +5,15 @@ import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.repository.FruitRepository;
 
+import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class FruitService {
@@ -48,18 +49,29 @@ public class FruitService {
     }
 
     public void deleteFruit(Fruit fruit) {
-        deleteAllCategories(fruit);
+        //deleteAllCategories(fruit);
+        for (Category category : fruit.getCategories()) {
+            category.getFruits().remove(fruit);
+            fruit.getCategories().remove(category);
+        }
         fruitRepository.delete(fruit);
     }
 
     public void deleteFruitById(String id) {
+        Fruit fruit;
         try {
-            Fruit fruit = getASingleFruit(id);
-            deleteAllCategories(fruit);
+            fruit = getASingleFruit(id);
+            //deleteAllCategories(fruit);
+            for (Category category : fruit.getCategories()) {
+                category.getFruits().remove(fruit);
+                categoryRepository.save(category);
+            }
         } catch (Exception e) {
             return;
         }
-        fruitRepository.deleteById(id);
+        fruit.getCategories().clear();
+        fruitRepository.save(fruit);
+        fruitRepository.delete(fruit);
     }
 
     public Iterable<Fruit> getFruitsByCategory(String category) {
@@ -68,11 +80,5 @@ public class FruitService {
 
     public Boolean existsByDescription(String desc) {
         return fruitRepository.existsByDescription(desc);
-    }
-
-    public void deleteAllCategories(Fruit fruit) {
-        for (Category category : fruit.getCategories()) {
-            fruit.getCategories().remove(category);
-        }
     }
 }

@@ -2,6 +2,8 @@ package com.amt.mygarden.models;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.engine.internal.Cascade;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +21,14 @@ public class Fruit {
     private float price;
     private int quantity;
 
-    @ManyToMany
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "fruit_categories",
-            joinColumns = @JoinColumn(name = "fruit_name", referencedColumnName = "categories_name"))
+            joinColumns = {@JoinColumn(name = "fruit_name")},
+            inverseJoinColumns = {@JoinColumn(name = "category_name")}
+    )
+
     private Set<Category> categories = new HashSet<>();
     private String image = "";
     private String description = "";

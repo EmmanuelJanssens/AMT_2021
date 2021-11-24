@@ -1,6 +1,8 @@
 package com.amt.mygarden.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,8 +17,9 @@ public class Category {
 
     public Category(){}
 
-
-    @ManyToMany(mappedBy = "categories")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Fruit> fruits = new HashSet<>();
 
 }
