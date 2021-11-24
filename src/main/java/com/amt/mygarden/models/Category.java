@@ -2,9 +2,7 @@ package com.amt.mygarden.models;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,5 +15,8 @@ public class Category {
 
     public Category(){}
 
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Fruit> fruits = new HashSet<>();
 
 }

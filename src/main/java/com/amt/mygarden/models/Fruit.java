@@ -2,6 +2,7 @@ package com.amt.mygarden.models;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.engine.internal.Cascade;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -19,22 +20,25 @@ public class Fruit {
     private int quantity;
 
     @ManyToMany
+    @JoinTable(name = "fruit_categories",
+            joinColumns = @JoinColumn(name = "fruit_name", referencedColumnName = "categories_name"))
     private Set<Category> categories = new HashSet<>();
-    private String image="";
-    private String description= "";
+    private String image = "";
+    private String description = "";
     @Transient
     MultipartFile imageFile;
 
     public Fruit(String name) {
-        if(name.isEmpty())
+        if (name.isEmpty())
             throw new IllegalArgumentException();
 
         setName(name);
     }
 
-    public Fruit() {}
+    public Fruit() {
+    }
 
-    public void addCategory(Category c){
+    public void addCategory(Category c) {
         this.categories.add(c);
     }
 }

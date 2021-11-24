@@ -23,22 +23,28 @@ public class FruitController {
     ServletContext context;
 
     @PostMapping // Map ONLY POST Requests
-    public RedirectView addNewFruit (@ModelAttribute Fruit fruit) throws IOException {
+    public RedirectView addNewFruit(@ModelAttribute Fruit fruit) throws IOException {
 
-        final RedirectView redirectView = new RedirectView("/dashboard",true);
+        final RedirectView redirectView = new RedirectView("/dashboard", true);
         fruitService.AddFruit(fruit);
         return redirectView;
     }
 
     @GetMapping
-    public String viewFruits(Model model){
-        model.addAttribute("allFruits",fruitService.getAllFruits());
+    public String viewFruits(Model model) {
+        model.addAttribute("allFruits", fruitService.getAllFruits());
         return "fruits";
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping(path = "/{id}")
     public String getFruit(@PathVariable String id, Model model) throws Exception {
-        model.addAttribute("fruit",fruitService.getASingleFruit(id));
+        model.addAttribute("fruit", fruitService.getASingleFruit(id));
         return "fruit";
+    }
+
+    @GetMapping(path = "/delete/{id}")
+    public String deleteFruit(@PathVariable String id) {
+        fruitService.deleteFruitById(id);
+        return "redirect:/fruits";
     }
 }
