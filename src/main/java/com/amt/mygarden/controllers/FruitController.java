@@ -71,7 +71,13 @@ public class FruitController {
 
     @GetMapping(path="/{id}")
     public String getFruit(@PathVariable String id, Model model) throws Exception {
-        model.addAttribute("fruit",fruitService.getASingleFruit(id));
+        model.addAttribute("fruit", fruitService.getASingleFruit(id));
         return "fruit";
+    }
+
+    @GetMapping(path = "/delete/{id}")
+    public String deleteFruit(@PathVariable String id) {
+        fruitService.deleteFruitById(id);
+        return "redirect:/fruits";
     }
 }

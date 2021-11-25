@@ -1,7 +1,11 @@
 package com.amt.mygarden.models;
 
+import com.amt.mygarden.repository.ItemRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.engine.internal.Cascade;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -18,23 +22,45 @@ public class Fruit {
     private float price;
     private int quantity;
 
-    @ManyToMany
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "fruit_categories",
+            joinColumns = {@JoinColumn(name = "fruit_name")},
+            inverseJoinColumns = {@JoinColumn(name = "category_name")}
+    )
+
     private Set<Category> categories = new HashSet<>();
-    private String image="";
-    private String description= "";
+    private String image = "";
+    private String description = "";
     @Transient
     MultipartFile imageFile;
 
     public Fruit(String name) {
-        if(name.isEmpty())
+        if (name.isEmpty())
             throw new IllegalArgumentException();
 
         setName(name);
     }
 
-    public Fruit() {}
-
-    public void addCategory(Category c){
-        this.categories.add(c);
+    public Fruit() {
     }
+
+    public void addCategory(Category c) {
+        this.categories.add(c);
+        c.getFruits().add(this);
+    }
+
+    public void deleteCategory(Category c) {
+        c.getFruits().remove(this);
+        this.categories.remove(c);
+    }
+
+    public void deleteCategories(){
+        for (Category category : getCategories()){
+            category.getFruits().remove(this);
+        }
+        categories.clear();
+    }
+
 }

@@ -40,4 +40,10 @@ public class DashBoardController {
 
         return "addFruit";
     }
+
+    @GetMapping(path = "/delete/{id}")
+    public String deleteFruit(@PathVariable String id) {
+        fruits.deleteFruitById(id);
+        return "redirect:/dashboard";
+    }
 }

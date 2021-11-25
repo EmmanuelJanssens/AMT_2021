@@ -1,8 +1,11 @@
 package com.amt.mygarden.models;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity(name = "Item")
 public class Item {
 
