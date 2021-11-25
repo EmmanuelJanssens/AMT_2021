@@ -6,6 +6,7 @@ import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.service.CategoryService;
 import com.amt.mygarden.service.FruitService;
 
+import com.amt.mygarden.service.ItemService;
 import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -35,6 +36,8 @@ public class FruitController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ItemService itemService;
 
     @Autowired
     ServletContext context;
@@ -74,7 +77,13 @@ public class FruitController {
         model.addAttribute("fruit", fruitService.getASingleFruit(id));
         return "fruit";
     }
-
+    @GetMapping(path = "/{id}/add/{quantity}")
+    public String addFruitsToCart(@PathVariable String id, @PathVariable String quantity) {
+        int q= Integer.valueOf(quantity);
+        itemService.addToCart(id,q);
+        fruitService.removeQuantity(id);
+        return "redirect:/cart";
+    }
     @GetMapping(path = "/delete/{id}")
     public String deleteFruit(@PathVariable String id) {
         fruitService.deleteFruitById(id);

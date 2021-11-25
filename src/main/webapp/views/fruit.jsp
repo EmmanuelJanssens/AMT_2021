@@ -126,12 +126,11 @@
                         <!-- start of addToCart -->
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="quantiy" placeholder="1" class="form-control quantity">
+                            <input type="text" id="quantity" placeholder="1" class="form-control quantity">
                         </div>
-                        <p>
-                            <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                        </p>
-                        <!-- end of addToCart -->
+                        <div class="col-sm-8">
+                            <a href="${pageContext.request.contextPath }/fruits/${fruit.name}/add/${quantity}" class="button"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                        </div>
                     </div>
                 </div>
             </section>

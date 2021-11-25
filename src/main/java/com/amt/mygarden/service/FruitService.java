@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class FruitService {
@@ -85,7 +86,14 @@ public class FruitService {
     public Iterable<Fruit> existsByDescription(String desc){
         return fruitRepository.findFruitsByDescription(desc);
     }
-
+    public void removeQuantity(String id) {
+        Optional<Fruit> opt = fruitRepository.findById(id);
+        if (opt.isPresent()) {
+            Fruit fruit = opt.get();
+            fruit.removeQuantity();
+            fruitRepository.save(fruit);
+        }
+    }
     public void deleteItemsContaining(Fruit fruit){
         for (Item item : itemRepository.findAll()){
             if(item.getFruit().equals(fruit)){
