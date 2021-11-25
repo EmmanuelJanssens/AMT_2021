@@ -21,7 +21,7 @@
 
 
     </jsp:attribute>
-  <jsp:attribute name="scripts">
+    <jsp:attribute name="scripts">
 <%--        all scripts that need to be place in head goes here--%>
     <%--        example: --%>
     <%--        <script src="js_file"></script>--%>
@@ -30,7 +30,7 @@
     <%--        </script>--%>
 
     </jsp:attribute>
-  <jsp:attribute name="bottomScrips">
+    <jsp:attribute name="bottomScrips">
     <%--        all scripts that need to be place in the bottom of body--%>
     <%--        example: --%>
     <%--        <script src="js_file"></script>--%>
@@ -38,64 +38,9 @@
     <%--            console.log("my script example")--%>
     <%--        </script>--%>
 
-      <script>
-          function changeContent() {
-              $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/open-fruit-modal',function (){
-                  $('#addfruit').modal('show');
-              });
-          }
-          function closeDialog(){
-              $('#addfruit').remove();
-              $('div').remove(".modal-backdrop");
-          }
 
-          function checkDescriptionValidity(url,description)
-          {
-              $.get(url+description,function(data){
-                  console.log(data)
-                  if(data===true)
-                  {
-                      $("#exists").text("Already exists")
-                      $("#exists").addClass('alert alert-dark')
-                      return false
-                  }
-                  else
-                  {
-                      $("#exists").removeClass('alert alert-dark')
-                      $("#exists").text("")
-                      return true;
-                  }
-              });
-
-              return false
-          }
-          <%--@elvariable id="fruitObj" type="com.amt.mygarden.models.Fruit"--%>
-          function addFruit(url){
-                const description = $("#fruitDescription").val()
-              if(!checkDescriptionValidity(url,description))
-                  return false;
-              $.get(url+description,function(data){
-                  {
-                      if($("#addFruitForm").isValid())
-                      {
-                          $("#addFruitForm").submit()
-                      }
-                  }
-              })
-          }
-
-          $("#addFruitForm").submit(function(e){
-              return false
-          });
-
-      </script>
     </jsp:attribute>
   <jsp:body>
-
-
-      <div id="addFruitFormWrapper">
-
-      </div>
 
       <div id="fruits" class="section dark_bg layout_padding ">
           <div class="container">
@@ -110,9 +55,8 @@
                   <thead>
                   <tr>
                       <th colspan="6">
-                          <button type="button" class="col-sm-12 btn-primary" data-toggle="modal" data-target="#addfruit" onclick="changeContent()">
-                              Add Fruit
-                          </button>
+                              <button onclick="location.href='/dashboard/add'"  class="col-sm-12 btn-primary"type="button">
+                                  AddFruit</button>
                       </th>
                   </tr>
                   <tr>
@@ -124,7 +68,7 @@
                       <th scope="col">delete</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="fruits-body">
 
 
                       <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
@@ -152,8 +96,5 @@
           </div>
 
       </div>
-
-
-
   </jsp:body>
 </tag:layout>

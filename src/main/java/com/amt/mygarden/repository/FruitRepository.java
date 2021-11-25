@@ -15,9 +15,5 @@ public interface FruitRepository extends CrudRepository<Fruit, String>{
     Iterable<Fruit> findFruitsByCategoriesContaining(Category c);
 
 
-
-    @Query(value = "SELECT IF(fruit.description IN (SELECT description FROM fruit), true , false) AS descExsits FROM fruit where fruit.description = '?1'",nativeQuery = true)
-    boolean descriptionExists(String fruit);
-
-    boolean existsByDescription(String description);
+    Iterable<Fruit> findFruitsByDescription(String description);
 }

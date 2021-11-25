@@ -28,29 +28,36 @@ public class FruitService {
         return fruitRepository.findById(fruitId).orElseThrow(() -> new Exception("fruit not found"));
     }
 
-    public void AddFruit(Fruit fruit) throws IOException {
+    public Fruit AddFruit(Fruit fruit) throws IOException {
 
-        MultipartFile file = fruit.getImageFile();
-        if(file.getOriginalFilename().isEmpty()){
-            fruit.setImage("placeholder.jpg");
+        if(fruitRepository.findFruitsByDescription(fruit.getDescription()).iterator().hasNext()){
+            return fruit;
         }
         else{
-            String upload = "/usr/local/mygarden/images/";
-            File dir = new File(upload + File.separator + "fruitImages"+File.separator);
-            if(!dir.exists())
-                dir.mkdirs();
-            FileCopyUtils.copy(file.getBytes(),new File(dir.getAbsolutePath()+File.separator+fruit.getName()+file.getOriginalFilename()));
-            fruit.setImage(fruit.getName()+file.getOriginalFilename());
+            MultipartFile file = fruit.getImageFile();
+            if(file.getOriginalFilename().isEmpty()){
+                fruit.setImage("placeholder.jpg");
+            }
+            else{
+                String upload = "/usr/local/mygarden/images/";
+                File dir = new File(upload + File.separator + "fruitImages"+File.separator);
+                if(!dir.exists())
+                    dir.mkdirs();
+                FileCopyUtils.copy(file.getBytes(),new File(dir.getAbsolutePath()+File.separator+fruit.getName()+file.getOriginalFilename()));
+                fruit.setImage(fruit.getName()+file.getOriginalFilename());
+            }
+
+            fruitRepository.save(fruit);
+            return null;
         }
 
-        fruitRepository.save(fruit);
     }
 
     public Iterable<Fruit> getFruitsByCategory(String category){
         return fruitRepository.findFruitsByCategoriesContaining(categoryRepository.findCategoryByName(category));
     }
-    public Boolean existsByDescription(String desc){
-        return fruitRepository.existsByDescription(desc);
+    public Iterable<Fruit> existsByDescription(String desc){
+        return fruitRepository.findFruitsByDescription(desc);
     }
 
 
