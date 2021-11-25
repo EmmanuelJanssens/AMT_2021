@@ -2,12 +2,32 @@
 'https://plantuml.com/class-diagram
 
 class Fruit <<entity>>{
--Long id
 -String name
+-float price
+-int quantity
+-Set<Category> categories
+-String image
 +Fruit(String name)
 -Fruit()
-+getName()
-+setName()
+}
+class Item <<entity>>{
+-Long id
+-String username
+-Fruit fruit
+-int quantity
++Item(String username, Fruit fruit, int quantity)
+-Item()
++addUniqueFruit()
++addSeveralFruit(int quantity)
+
 
 }
+class Category <<entity>>{
+-string name
++Category()
+}
+
+
+Item "1"- "*" Fruit : contains >
+Fruit "*"- "*" Category : has >
 @enduml
