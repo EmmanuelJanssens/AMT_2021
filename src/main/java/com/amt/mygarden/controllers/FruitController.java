@@ -1,7 +1,9 @@
 package com.amt.mygarden.controllers;
 
 import com.amt.mygarden.models.Fruit;
+
 import com.amt.mygarden.repository.CategoryRepository;
+import com.amt.mygarden.service.CategoryService;
 import com.amt.mygarden.service.FruitService;
 
 import io.micrometer.core.lang.Nullable;
@@ -32,6 +34,9 @@ public class FruitController {
     private CategoryRepository categories;
 
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     ServletContext context;
 
     @PostMapping // Map ONLY POST Requests
@@ -53,6 +58,7 @@ public class FruitController {
     @GetMapping
     public String viewFruits(Model model){
         model.addAttribute("allFruits",fruitService.getAllFruits());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "fruits";
     }
 
@@ -65,7 +71,7 @@ public class FruitController {
 
     @GetMapping(path="/{id}")
     public String getFruit(@PathVariable String id, Model model) throws Exception {
-        model.addAttribute("f",fruitService.getASingleFruit(id));
+        model.addAttribute("fruit",fruitService.getASingleFruit(id));
         return "fruit";
     }
 }
