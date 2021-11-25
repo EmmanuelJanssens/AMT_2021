@@ -2,16 +2,16 @@ package com.amt.mygarden.service;
 
 import com.amt.mygarden.models.Category;
 import com.amt.mygarden.models.Fruit;
+import com.amt.mygarden.models.Item;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.repository.FruitRepository;
 
-import com.mysql.cj.Session;
+import com.amt.mygarden.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,6 +22,9 @@ public class FruitService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    ItemRepository itemRepository;
 
     public Iterable<Fruit> getAllFruits() {
         return fruitRepository.findAll();
@@ -49,11 +52,8 @@ public class FruitService {
     }
 
     public void deleteFruit(Fruit fruit) {
-        //deleteAllCategories(fruit);
-        for (Category category : fruit.getCategories()) {
-            category.getFruits().remove(fruit);
-            fruit.getCategories().remove(category);
-        }
+        fruit.deleteCategories();
+        deleteItemsContaining(fruit);
         fruitRepository.delete(fruit);
     }
 
@@ -61,16 +61,12 @@ public class FruitService {
         Fruit fruit;
         try {
             fruit = getASingleFruit(id);
-            //deleteAllCategories(fruit);
-            for (Category category : fruit.getCategories()) {
-                category.getFruits().remove(fruit);
-                categoryRepository.save(category);
-            }
         } catch (Exception e) {
             return;
         }
-        fruit.getCategories().clear();
-        fruitRepository.save(fruit);
+        fruit.deleteCategories();
+        //could also make the item empty
+        deleteItemsContaining(fruit);
         fruitRepository.delete(fruit);
     }
 
@@ -80,5 +76,13 @@ public class FruitService {
 
     public Boolean existsByDescription(String desc) {
         return fruitRepository.existsByDescription(desc);
+    }
+
+    public void deleteItemsContaining(Fruit fruit){
+        for (Item item : itemRepository.findAll()){
+            if(item.getFruit().equals(fruit)){
+                itemRepository.delete(item);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.amt.mygarden.models;
 
+import com.amt.mygarden.repository.ItemRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,5 +48,19 @@ public class Fruit {
 
     public void addCategory(Category c) {
         this.categories.add(c);
+        c.getFruits().add(this);
     }
+
+    public void deleteCategory(Category c) {
+        c.getFruits().remove(this);
+        this.categories.remove(c);
+    }
+
+    public void deleteCategories(){
+        for (Category category : getCategories()){
+            category.getFruits().remove(this);
+        }
+        categories.clear();
+    }
+
 }
