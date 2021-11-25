@@ -47,13 +47,12 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
             f1.setName("Orange");
             f1.setPrice(2.00f);
             f1.setQuantity(10);
-
             f1.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f1.setImage("imageURL");
+
             f2.setName("Banana");
             f2.setPrice(0.90f);
             f2.setQuantity(40);
-
             f2.addCategory(categoryRepository.findById("Exotic").orElse(null));
             f2.setImage("imageURL");
 
@@ -66,14 +65,11 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
             f4.setName("Apple");
             f4.setPrice(1.00f);
             f4.setQuantity(20);
-
             f4.setImage("imageURL");
 
             f5.setName("Yuzu");
             f5.setPrice(4.00f);
             f5.setQuantity(15);
-
-
             f5.addCategory(categoryRepository.findById("Citrus").orElse(null));
             f5.addCategory(categoryRepository.findById("Exotic").orElse(null));
             f5.setImage("imageURL");
