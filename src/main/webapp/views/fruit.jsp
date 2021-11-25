@@ -107,7 +107,7 @@
                             <span class="posted_in">
                                 <strong>Categories:</strong>
                                 <c:forEach items="${fruit.categories}" var="category">
-                                    <a rel="tag" href="#">${category.name}</a>
+                                    <a rel="tag" href="${pageContext.request.contextPath}/categories/${category.name}/fruits">${category.name}</a>
                                 </c:forEach>
                             </span>
                         </div>

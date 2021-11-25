@@ -13,7 +13,18 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a href="${pageContext.request.contextPath}/fruits" class="list-group-item list-group-item-action">All</a>
+                        <c:forEach items="${categories}" var="category">
+                            <a href="${pageContext.request.contextPath}/categories/${category.name}/fruits" class="list-group-item list-group-item-action">${category.name}</a>
+                        </c:forEach>
+                    </div>
+                </div>
                 <div class="col-md-9">
+                    <c:if test="${empty(allFruits)}">
+                        No Fruits found for this category
+                    </c:if>
                     <c:forEach items="${allFruits}" var="fruit">
                         <a href="/fruits/${fruit.name}" class="row">
                             <div class="col-sm-4">
