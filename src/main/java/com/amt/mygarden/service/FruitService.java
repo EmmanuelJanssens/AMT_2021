@@ -35,20 +35,29 @@ public class FruitService {
         return fruitRepository.findById(fruitId).orElseThrow(() -> new Exception("fruit not found"));
     }
 
-    public void AddFruit(Fruit fruit) throws IOException {
+    public Fruit AddFruit(Fruit fruit) throws IOException {
 
-        MultipartFile file = fruit.getImageFile();
-        if (file.getOriginalFilename().isEmpty()) {
-            fruit.setImage("placeholder.jpg");
-        } else {
-            String upload = "/usr/local/mygarden/images/";
-            File dir = new File(upload + File.separator + "fruitImages" + File.separator);
-            if (!dir.exists())
-                dir.mkdirs();
-            FileCopyUtils.copy(file.getBytes(), new File(dir.getAbsolutePath() + File.separator + fruit.getName() + file.getOriginalFilename()));
-            fruit.setImage(fruit.getName() + file.getOriginalFilename());
+        if(fruitRepository.findFruitsByDescription(fruit.getDescription()).iterator().hasNext()){
+            return fruit;
         }
-        fruitRepository.save(fruit);
+        else{
+            MultipartFile file = fruit.getImageFile();
+            if(file.getOriginalFilename().isEmpty()){
+                fruit.setImage("placeholder.jpg");
+            }
+            else{
+                String upload = "/usr/local/mygarden/images/";
+                File dir = new File(upload + File.separator + "fruitImages"+File.separator);
+                if(!dir.exists())
+                    dir.mkdirs();
+                FileCopyUtils.copy(file.getBytes(),new File(dir.getAbsolutePath()+File.separator+fruit.getName()+file.getOriginalFilename()));
+                fruit.setImage(fruit.getName()+file.getOriginalFilename());
+            }
+
+            fruitRepository.save(fruit);
+            return null;
+        }
+
     }
 
     public void deleteFruit(Fruit fruit) {
@@ -73,9 +82,8 @@ public class FruitService {
     public Iterable<Fruit> getFruitsByCategory(String category) {
         return fruitRepository.findFruitsByCategoriesContaining(categoryRepository.findCategoryByName(category));
     }
-
-    public Boolean existsByDescription(String desc) {
-        return fruitRepository.existsByDescription(desc);
+    public Iterable<Fruit> existsByDescription(String desc){
+        return fruitRepository.findFruitsByDescription(desc);
     }
 
     public void deleteItemsContaining(Fruit fruit){

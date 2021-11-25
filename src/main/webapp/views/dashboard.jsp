@@ -38,56 +38,37 @@
         <%--            console.log("my script example")--%>
         <%--        </script>--%>
 
-        <script>
-            function changeContent() {
-                $('#addFruitFormWrapper').load('${pageContext.request.contextPath}/dashboard/open-fruit-modal', function () {
-                    $('#addfruit').modal('show');
-                });
-            }
 
-            function checkDescriptionValidity(url, description) {
-                $.get(url + description, function (data) {
-                    console.log(data)
-                    if (data === true) {
-                        $("#exists").text("Already exists")
-                        $("#exists").addClass('alert alert-dark')
-                        return false
-                    } else {
-                        $("#exists").removeClass('alert alert-dark')
-                        $("#exists").text("")
-                        return true;
-                    }
-                });
-
-                return false
-            }
-
-            <%--@elvariable id="fruitObj" type="com.amt.mygarden.models.Fruit"--%>
-
-            function addFruit(url) {
-                const description = $("#fruitDescription").val()
-                if (!checkDescriptionValidity(url, description))
-                    return false;
-                $.get(url + description, function (data) {
-                    {
-                        if ($("#addFruitForm").isValid()) {
-                            $("#addFruitForm").submit()
-                        }
-                    }
-                })
-            }
-
-            $("#addFruitForm").submit(function (e) {
-                return false
-            });
-
-            function deleteFruit() {
-
-            }
-        </script>
     </jsp:attribute>
-    <jsp:body>
+  <jsp:body>
 
+      <div id="fruits" class="section dark_bg layout_padding ">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="heading full text_align_center">
+                          <h2 class="white_font full text_align_center">Our Fruits</h2>
+                      </div>
+                  </div>
+              </div>
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th colspan="6">
+                              <button onclick="location.href='/dashboard/add'"  class="col-sm-12 btn-primary"type="button">
+                                  AddFruit</button>
+                      </th>
+                  </tr>
+                  <tr>
+                      <th scope="col">image</th>
+                      <th scope="col">name</th>
+                      <th scope="col">price</th>
+                      <th scope="col">quantity</th>
+                      <th scope="col">description</th>
+                      <th scope="col">delete</th>
+                  </tr>
+                  </thead>
+                  <tbody id="fruits-body">
 
         <div id="addFruitFormWrapper">
 
@@ -124,32 +105,9 @@
                     <tbody>
 
 
-                        <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
-                    <c:forEach var="fruit" items="${allFruits}">
-                        <tr>
-                            <td><img
-                                    style="display: block"
-                                    src="${pageContext.request.contextPath}/download?filename=${fruit.image}"
-                                    alt="image"
-                                    width="10%"
-                                    height="10%"
-                            /></td>
-                            <td class="white_font"><strong>${fruit.name}</strong></td>
-                            <td class="white_font">${fruit.price}</td>
-                            <td class="white_font">${fruit.quantity}</td>
-                            <td class="white_font">${fruit.description}</td>
+      </div>
+  </jsp:body>
                             <td>
                                 <a href="${pageContext.request.contextPath }/dashboard/delete/${fruit.name}" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-
-    </jsp:body>
 </tag:layout>

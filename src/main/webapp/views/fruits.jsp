@@ -13,10 +13,29 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a href="${pageContext.request.contextPath}/fruits" class="list-group-item list-group-item-action">All</a>
+                        <c:forEach items="${categories}" var="category">
+                            <a href="${pageContext.request.contextPath}/categories/${category.name}/fruits" class="list-group-item list-group-item-action">${category.name}</a>
+                        </c:forEach>
+                    </div>
+                </div>
                 <div class="col-md-9">
+                    <c:if test="${empty(allFruits)}">
+                        No Fruits found for this category
+                    </c:if>
                     <c:forEach items="${allFruits}" var="fruit">
                         <a href="/fruits/${fruit.name}" class="row">
                             <div class="col-sm-4">
+                                <c:choose>
+                                    <c:when  test="${fruit.price <= 0}">
+                                        <img src = "${pageContext.request.contextPath}/images/comming-soon.png" alt="" style="position:absolute; top:0; left:0">
+                                    </c:when>
+                                    <c:when  test="${fruit.quantity <= 0}">
+                                        <img src = "${pageContext.request.contextPath}/images/unavailable.png" alt="" style="position:absolute; top:0; left:0">
+                                    </c:when>
+                                </c:choose>
                                 <img src="${pageContext.request.contextPath}/download?filename=${fruit.image}" class="img-responsive" alt="">
                             </div>
                             <div class="col-sm-8">
