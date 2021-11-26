@@ -45,7 +45,14 @@
                             </div>
                             <div class="col-sm-8">
                                 <c:if  test="${fruit.quantity > 0 && fruit.price > 0}">
-                                <a href="${pageContext.request.contextPath }/fruits/${fruit.name}/add/1" class="button"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                    <form:form action="${pageContext.request.contextPath}/fruits/${fruit.name}/add-to-cart"
+                                               method="POST"
+                                               modelAttribute="fruit"
+                                               id="addToCartForm"
+                                    >
+                                        <button type="submit" class="btn btn-round btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                    </form:form>
+<%--                                <a href="${pageContext.request.contextPath }/fruits/${fruit.name}/add/1" class="button"><i class="fa fa-shopping-cart"></i> Add to Cart</a>--%>
                                 </c:if>
                             </div>
                         </a>
