@@ -1,0 +1,59 @@
+@startuml
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User as Actor
+participant "fruits.jsp" as UI <<presentation>>
+control FruitController as Controller <<application>>
+participant FruitService as FS<<service>>
+participant ItemService as IS<<service>>
+database FruitRepository as FR <<repository>>
+participant "item:Item" as Domain <<domain>>
+participant "fruit:Fruit" as Fruit <<domain>>
+database ItemRepository as IR <<repository>>
+
+
+Actor --> UI: Add fruit to Cart
+activate Actor
+activate UI
+         UI -> Controller: getFruit(String id, Model model)
+      activate Controller
+
+       Controller ->FS : getASingleFruit(String id)
+       activate FS
+       FS -> FR : findById(String id)
+       activate FR
+       deactivate FR
+       deactivate FS
+       deactivate Controller
+    UI --> Actor: Shows all Fruits
+    Actor --> UI: Presses button to add to cart
+
+   UI -> Controller: addFruitsToCart(String id, String quantity)
+ activate Controller
+
+        Controller -> IS : addToCart(String id, int quantity)
+        activate IS
+
+        IS -> FR :fruit=findById(String id)
+        activate FR
+        deactivate FR
+        IS -> IR : item=findUserFruitAndCart(String username, fruit)
+        activate IR
+        deactivate IR
+       IS -> Domain :  addSeveralFruit(int quantity)
+       activate Domain
+       deactivate Domain
+       IS -> IR : save(item)
+       activate IR
+       deactivate IR
+       deactivate IS
+       deactivate Controller
+
+ UI --> Actor: Fruit is added and Cart is updated
+deactivate UI
+deactivate Actor
+@enduml
