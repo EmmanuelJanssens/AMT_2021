@@ -10,6 +10,7 @@ import com.amt.mygarden.service.ItemService;
 import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -77,10 +78,9 @@ public class FruitController {
         model.addAttribute("fruit", fruitService.getASingleFruit(id));
         return "fruit";
     }
-    @GetMapping(path = "/{id}/add/{quantity}")
-    public String addFruitsToCart(@PathVariable String id, @PathVariable String quantity) {
-        int q= Integer.valueOf(quantity);
-        itemService.addToCart(id,q);
+    @PostMapping(path = "/{id}/add-to-cart")
+    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
+        itemService.addToCart(id, quantity);
         fruitService.removeQuantity(id);
         return "redirect:/cart";
     }

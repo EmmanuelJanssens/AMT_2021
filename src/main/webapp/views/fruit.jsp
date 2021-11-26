@@ -1,5 +1,6 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <tag:layout>
     <jsp:attribute name="css">
@@ -125,13 +126,19 @@
                         <%-- todo: implement logic --%>
                         <!-- start of addToCart -->
                         <c:if  test="${fruit.quantity > 0 && fruit.price > 0}">
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="text" id="quantity" placeholder="1" class="form-control quantity">
-                        </div>
-                        <div class="col-sm-8">
-                            <a href="${pageContext.request.contextPath }/fruits/${fruit.name}/add/${quantity}" class="button"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-                        </div>
+                            <form:form action="${pageContext.request.contextPath}/fruits/${fruit.name}/add-to-cart"
+                                       method="POST"
+                                       modelAttribute="fruit"
+                                       id="addToCartForm"
+                            >
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" id="quantity" name="quantity" placeholder="quantity" class="form-control quantity">
+                                </div>
+                                <p>
+                                    <button type="submit" class="btn btn-round btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </p>
+                            </form:form>
                         </c:if>
                     </div>
                 </div>
