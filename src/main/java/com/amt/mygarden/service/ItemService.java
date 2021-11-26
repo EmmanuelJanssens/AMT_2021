@@ -28,9 +28,6 @@ public class ItemService {
         }
     }
 
-    @Autowired
-    ItemRepository itemRepository;
-
     public void deleteItemById(Long id) {
 
         Item itemToDelete = null;
