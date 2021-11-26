@@ -126,7 +126,7 @@
                         <!-- start of addToCart -->
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="quantiy" placeholder="1" class="form-control quantity">
+                            <input type="quantity" placeholder="1" class="form-control quantity">
                         </div>
                         <p>
                             <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>

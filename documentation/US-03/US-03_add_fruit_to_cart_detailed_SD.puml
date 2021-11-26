@@ -10,40 +10,27 @@ participant "fruits.jsp" as UI <<presentation>>
 control FruitController as Controller <<application>>
 participant FruitService as FS<<service>>
 participant ItemService as IS<<service>>
-participant CategoryService as CS<<service>>
 database FruitRepository as FR <<repository>>
 participant "item:Item" as Domain <<domain>>
 participant "fruit:Fruit" as Fruit <<domain>>
 database ItemRepository as IR <<repository>>
-database CategoryRepository as CR <<repository>>
+
 
 Actor --> UI: Add fruit to Cart
 activate Actor
 activate UI
-         UI -> Controller: viewFruits(Model model)
+         UI -> Controller: getFruit(String id, Model model)
       activate Controller
 
-       Controller ->FS : getAllFruits()
+       Controller ->FS : getASingleFruit(String id)
        activate FS
-       FS -> FR : findAll()
+       FS -> FR : findById(String id)
        activate FR
        deactivate FR
-
-
-
-
        deactivate FS
-
-        Controller ->CS : getAllCategories()
-        activate CS
-        CS -> CR: findAll()
-        activate CR
-        deactivate CR
-        deactivate CS
-
        deactivate Controller
-    UI --> Actor: Shows all Fruits
-    Actor --> UI: Presses button to add to cart
+    UI --> Actor: Shows detailed fruit
+    Actor --> UI: Choses quantity and presses button to add to cart
 
    UI -> Controller: addFruitsToCart(String id, String quantity)
  activate Controller
