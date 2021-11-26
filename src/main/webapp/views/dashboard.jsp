@@ -74,12 +74,21 @@
                         <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
                     <c:forEach var="fruit" items="${allFruits}">
                         <tr>
-                            <td><img
-                                    style="display: block"
-                                    src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
-                                    width="10%"
-                                    height="10%"
-                            /> </td>
+                            <td style="display: block">
+                                <div class ="col-sm-4">
+                                    <c:choose>
+                                        <c:when  test="${fruit.price <= 0}">
+                                            <img src = "${pageContext.request.contextPath}/images/comming-soon.png" alt="" style="position:absolute; top:0; left:0">
+                                        </c:when>
+                                        <c:when  test="${fruit.quantity <= 0}">
+                                            <img src = "${pageContext.request.contextPath}/images/unavailable.png" alt="" style="position:absolute; top:0; left:0" >
+                                        </c:when>
+                                    </c:choose>
+                                    <img
+                                            style="display: block"
+                                            src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"/>
+                                </div>
+                             </td>
                             <td class="white_font"><strong>${fruit.name}</strong></td>
                             <td class="white_font">${fruit.price}</td>
                             <td class="white_font">${fruit.quantity}</td>
