@@ -27,4 +27,31 @@ public class ItemService {
             itemRepository.save(item);
         }
     }
+
+    @Autowired
+    ItemRepository itemRepository;
+
+    public void deleteItemById(Long id) {
+
+        Item itemToDelete = null;
+        try {
+            itemToDelete = itemRepository.findById(id).orElseThrow(() -> new Exception("item not found"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assert itemToDelete != null;
+        itemRepository.delete(itemToDelete);
+    }
+
+    // by user?
+    public void deleteAllItemsByUser(String user){
+        Iterable<Item> itemsToDelete = itemRepository.findUserKart(user);
+        for(Item i : itemsToDelete){
+            deleteItemById(i.getId());
+        }
+    }
+
+
 }
+
