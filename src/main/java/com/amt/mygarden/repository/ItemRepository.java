@@ -14,4 +14,5 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     Iterable<Item> findUserKart(String username);
     @Query("SELECT i FROM Item i where i.username = ?1 AND i.fruit=?2")
     Optional<Item> findUserFruitAndKart(String username, Fruit fruit);
+
 }
