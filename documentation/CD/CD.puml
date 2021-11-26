@@ -17,7 +17,6 @@ class Item <<entity>>{
 -int quantity
 +Item(String username, Fruit fruit, int quantity)
 -Item()
-+addUniqueFruit()
 +addSeveralFruit(int quantity)
 
 

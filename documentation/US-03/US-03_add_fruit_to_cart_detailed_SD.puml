@@ -24,7 +24,7 @@ activate UI
 
        Controller ->FS : getASingleFruit(String id)
        activate FS
-       FS -> FR : findById(String id)
+       FS -> FR : fruit=findById(String id)
        activate FR
        deactivate FR
        deactivate FS
