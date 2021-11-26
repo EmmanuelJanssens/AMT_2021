@@ -133,7 +133,7 @@
                             >
                                 <div class="form-group">
                                     <label for="quantity">Quantity</label>
-                                    <input type="number" id="quantity" name="quantity" placeholder="quantity" class="form-control quantity">
+                                    <input type="number" id="quantity" name="quantity" placeholder="quantity" min="1" class="form-control quantity">
                                 </div>
                                 <p>
                                     <button type="submit" class="btn btn-round btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
