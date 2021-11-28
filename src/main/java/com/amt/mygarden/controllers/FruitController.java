@@ -81,12 +81,17 @@ public class FruitController {
     @PostMapping(path = "/{id}/add-to-cart")
     public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
         itemService.addToCart(id, quantity);
-        fruitService.removeQuantity(id);
         return "redirect:/cart";
     }
     @GetMapping(path = "/delete/{id}")
     public String deleteFruit(@PathVariable String id) {
         fruitService.deleteFruitById(id);
         return "redirect:/fruits";
+    }
+
+    @DeleteMapping(path = "/{id}/remove-from-cart")
+    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
+        itemService.addToCart(id, -quantity);
+        return "redirect:/cart";
     }
 }

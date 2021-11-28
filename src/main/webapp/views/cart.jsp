@@ -50,22 +50,24 @@
                     if(type === 'minus') {
 
                         if(currentVal > input.attr('min')) {
-                            input.val(currentVal - 1).change();
+                            $.post("${pageContext.request.contextPath}/fruits/"+fieldName+"/remove-from-cart", {_method: "delete"})
+                                .done(() => {
+                                    input.val(currentVal - 1).change();
+                                    if (currentVal <= 1) {
+                                        $(this).attr('disabled', true);
+                                    }
+                                })
                         }
-                        if(parseInt(input.val()) == input.attr('min')) {
-                            window.location.href = "${pageContext.request.contextPath }/cart/delete/"+idItem;
-                            $(this).attr('disabled', true);
-                        }
-
                     } else if(type === 'plus') {
-
                         if(currentVal < input.attr('max')) {
-                            input.val(currentVal + 1).change();
+                            $.post("${pageContext.request.contextPath}/fruits/"+fieldName+"/add-to-cart")
+                                .done(() => {
+                                    input.val(currentVal + 1).change();
+                                    if((currentVal + 1) === input.attr('max')) {
+                                        $(this).attr('disabled', true);
+                                    }
+                                })
                         }
-                        if(parseInt(input.val()) == input.attr('max')) {
-                            $(this).attr('disabled', true);
-                        }
-
                     }
                 } else {
                     input.val(0);
