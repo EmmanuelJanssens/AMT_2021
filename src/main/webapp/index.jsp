@@ -1,324 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>MyGarden</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
-    <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-</head>
-<!-- body -->
-
-<body class="main-layout">
-    <!-- loader  -->
-    <div class="loader_bg">
-        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-    </div>
-    <!-- end loader -->
-    <!-- header -->
-    <header id="home">
-        <!-- header inner -->
-        <div class="header">
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<tag:layout>
+    <jsp:attribute name="css">
+<%--        all custom css for this page goes here--%>
+<%--        example: --%>
+<%--        <link rel="stylesheet" href="css_file">--%>
+<%--        <style>--%>
+<%--            h1 {--%>
+<%--                color: white;--%>
+<%--            }--%>
+<%--        </style>--%>
+    </jsp:attribute>
+    <jsp:attribute name="scripts">
+<%--        all scripts that need to be place in head goes here--%>
+<%--        example: --%>
+<%--        <script src="js_file"></script>--%>
+<%--        <script>--%>
+<%--            console.log("my script example")--%>
+<%--        </script>--%>
+    </jsp:attribute>
+    <jsp:attribute name="bottomScrips">
+<%--        all scripts that need to be place in the bottom of body--%>
+<%--        example: --%>
+<%--        <script src="js_file"></script>--%>
+<%--        <script>--%>
+<%--            console.log("my script example")--%>
+<%--        </script>--%>
+    </jsp:attribute>
+    <jsp:body>
+        <!-- about -->
+        <div id="about" class="about">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                        <div class="full">
-                            <div class="center-desk">
-                                <div class="logo"> <a href="index.jsp"><img src="images/logo.png" alt="#"></a> </div>
-                            </div>
+                    <div class="col-md-6 offset-md-3">
+                        <div class="titlepage">
+                            <h2>About Us</h2>
+                            <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptu </span>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                        <div class="menu-area">
-                            <div class="limit-box">
-                                <nav class="main-menu">
-                                    <ul class="menu-area-main">
-                                        <li class="active"><a href="#home">Home</a></li>
-                                        <li><a href="#about">About Us</a></li>
-                                        <li><a href="#fruits">Fruits</a></li>
-                                        <li><a href="#blog">Blog</a></li>
-                                        <li><a href="#contact">Contact Us</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="about_img">
+                            <figure><img src="images/about.png" alt="#"/></figure>
+                            <a class="read_more" href="Javascript:void(0)"> Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end header inner -->
-    </header>
-    <!-- end header -->
-
-
-    <section class="slider_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="full">
-                        <h1><strong class="cur">Best</strong><br>Fresh Red Apple</h1>
-                            <a href="${pageContext.request.contextPath}/helloServlet">Hello Servlet</a>
-                        <a href="${pageContext.request.contextPath}/demo/all">Get all fruits</a>
-                        <p><%= "The bestest apple in amt" %></p>
-                            <div class="button_section"><a class="main_bt" href="#">Buy Now</a></div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="full text_align_center">
-                        <img class="slide_img" src="images/slider_img.png" alt="#" /> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- about -->
-    <div id="about" class="about layout_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="img-responsive" src="images/about_img.png" alt="#" />
-                </div>
-                <div class="col-md-6">
-                    <div class="heading margin_top_30">
-                        <h2>About our shop</h2>
-                    </div>
-                    <div class="full margin_top_20">
-                        <p>We are an online shop that sells fruits and vegetables. Our produts are of the best quality you can find. Most of our products are BIO and come from fair working conditions </p>
-                    </div>
-                    <div class="full margin_top_30">
-                        <a class="main_bt" href="#">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end about -->
-    <!-- section -->
-    <div id="fruits" class="section dark_bg layout_padding left_white">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                    <div class="heading full text_align_center">
-                        <h2 class="white_font full text_align_center">Our Fruits</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-               <div class="col-md-4 margin_top_30">
-                    <div class="full fr">
-                        <img class="img-responsive" src="images/f1.png" alt="#" />
-                    </div>
-                    <div class="full text_align_center">
-                        <h3 class="white_font">Black Grapes<br><strong class="theme_blue">Fresh Fruit</strong></h3>
-                    </div>   
-                </div>
-                <div class="col-md-4 margin_top_30">
-                    <div class="full fr">
-                        <img class="img-responsive" src="images/f2.png" alt="#" />
-                    </div>
-                    <div class="full text_align_center">
-                        <h3 class="white_font">Pineapple<br><strong class="theme_blue">Fresh Fruit</strong></h3>
-                    </div>
-                </div>
-                <div class="col-md-4 margin_top_30">
-                    <div class="full fr">
-                        <img class="img-responsive" src="images/f3.png" alt="#" />
-                    </div>
-                    <div class="full text_align_center">
-                        <h3 class="white_font">Bananas<br><strong class="theme_blue">Fresh Fruit</strong></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end section -->
-    <!-- section -->
-    <div class="section layout_padding">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                    <div class="full main_heading_1">
-                        <h2>Fresh Lemon</h2>
-                        <p>This lemon is as cold as your ex-girlfriend's heart </p>
-                    </div>   
-                    <div class="full margin_top_30">
-                        <a class="main_bt" href="#">Read More</a>
-                    </div>
-                </div>
-                <div class="col-md-6 margin_top_30 padding_right_0">
-                    <div class="full">
-                        <img src="images/green_fr.png" alt="#" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end section -->
-<!-- section -->
-    <div id="blog" class="section dark_bg layout_padding right_white">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                    <div class="heading full text_align_center">
-                        <h2 class="white_font full text_align_center">Our Blog</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-               <div class="col-md-4 margin_top_30">
-                    <div class="full" style="overflow: hidden;">
-                    <div class="full bl">
-                        <img class="img-responsive" src="images/blog1.png" alt="#" />
-                    </div>
-                    <div class="full blog_blue text_align_center">
-                        <h3 class="white_font">Post by Teo Ferrari 27/07/2019</h3>
-                        <p>Incredible product !!</p>
-                    </div> 
-                     </div>  
-                </div>
-                <div class="col-md-4 margin_top_30">
-                    <div class="full" style="overflow: hidden;">
-                    <div class="full bl">
-                        <img class="img-responsive" src="images/blog2.png" alt="#" />
-                    </div> 
-                    <div class="full blog_blue text_align_center">
-                        <h3 class="white_font">Post by Emmanuel Janssens 27/07/2019</h3>
-                        <p>Very peachy</p>
-                    </div>
-                     </div>
-                </div>
-                <div class="col-md-4 margin_top_30">
-                    <div class="full" style="overflow: hidden;">
-                    <div class="full bl">
-                        <img class="img-responsive" src="images/blog3.png" alt="#" />
-                    </div> 
-                    <div class="full blog_blue text_align_center">
-                        <h3 class="white_font">Post by David Mark 27/07/2019</h3>
-                        <p>Apple time !</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end section -->
-    <!-- section -->
-    <div id="contact" class="section layout_padding">
-        <div class="container-fluid">
-            <div class="row">
-                
-                <div class="col-md-6 padding_left_0">
-                    <div class="full">
-                        <img class="float-left" src="images/fruit_img.png" alt="#" />
-                    </div>
-                </div>
-
-               <div class="col-md-6">
-                <div class="heading">
-                        <h2>Request a <strong class="theme_blue">Call Back</strong></h2>
-                    </div>
-                    <div class="full margin_top_20">
-                        <form>
-                        <div class="row">
-                            <div class="col-sm-12">
-                               <input class="form-control" placeholder="Your Name" type="text" required="">
-                            </div>
-                            <div class="col-sm-12">
-                               <input class="form-control" placeholder="Email" type="Email" required="">
-                            </div>
-                            <div class="col-sm-12">
-                                <input class="form-control" placeholder="Phone" type="text" required="">
-                            </div>
-                            <div class="col-sm-12">
-                                <textarea class="form-control textarea" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-                        <button class="main_bt">Send</button>
-                    </form>
-                    </div>   
-                    
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <!-- end section -->
-
-    <!-- footer -->
-    <footer>
-        <div class="footer layout_padding">
+        <!-- end about -->
+        <!-- our products -->
+        <div class="products">
             <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <h3>Contact Us</h3>
-                            <p>Healing Center, 176 W Street name, New York, NY<br><br>(+91) 987 654 3210<br><br>demo@gmail.com</p>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <h3>Pages</h3>
-                            <p>
-                              <a href="#home">Home</a><br>
-                              <a href="#about">About Us</a><br>
-                              <a href="#fruits">Fruits</a><br>
-                              <a href="#blog">Blog</a><br>
-                              <a href="#contact">Contact Us</a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <h3>Recent Post</h3>
-                            <p><span><img src="images/f_b1.png"></span><span>consectetur adipisc elit,<br>sed do eiusmod</span></p>
-                            <p class="margin_top_20"><span><img src="images/f_b2.png"></span><span>consectetur adipisc elit,<br>sed do eiusmod</span></p>
-                            <p class="margin_top_20"><span><img src="images/f_b3.png"></span><span>consectetur adipisc elit,<br>sed do eiusmod</span></p>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <h3>Newsletter</h3>
-                            <p>
-                                <form>
-                                    <input type="text" name="email" placeholder="Enter Your Email" /> 
-                                    <button>Subscribe</button>
-                                </form>
-                            </p>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="titlepage">
+                            <h2>Our Products</h2>
+                            <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptu
+                     </span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div id="ho_bo" class="our_products">
+                            <div class="product">
+                                <figure><img src="images/pro1.png" alt="#"/></figure>
+                            </div>
+                            <h3>Mangoes For Juice</h3>
+                            <span>Nam libero tempore</span>
+                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div id="ho_bo" class="our_products">
+                            <div class="product">
+                                <figure><img src="images/pro2.png" alt="#"/></figure>
+                            </div>
+                            <h3>Apple For Juice</h3>
+                            <span>Nam libero tempore</span>
+                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div id="ho_bo" class="our_products">
+                            <div class="product">
+                                <figure><img src="images/pro3.png" alt="#"/></figure>
+                            </div>
+                            <h3>Orange For Juice</h3>
+                            <span>Nam libero tempore</span>
+                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div id="ho_bo" class="our_products">
+                            <div class="product">
+                                <figure><img src="images/pro4.png" alt="#"/></figure>
+                            </div>
+                            <h3>Pineapple For Juice</h3>
+                            <span>Nam libero tempore</span>
+                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="copyright">
+        <!-- end our products -->
+        <!-- using -->
+        <div class="using">
+            <div class="container-fluid">
+                <div class="row d_flex">
+                    <div class="col-md-6">
+                        <div class="titlepage">
+                            <h2 >Lorem Ipsum using</h2>
+                            <p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+                            <a class="read_more white_bg" href="Javascript:void(0)"> Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-md-1 padding_right0">
+                        <div class="frout_img">
+                            <figure><img src="images/frout.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end using -->
+        <!-- gallery -->
+        <div  class="gallery">
             <div class="container">
-                <p>Copyright 2019 All Right Reserved By <a href="https://html.design/">Free html Templates</a></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2>Gallery</h2>
+                            <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery1.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery2.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery3.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery4.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery5.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="gallery_img">
+                            <figure><img src="images/gallery6.png" alt="#"/></figure>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
-    <!-- end footer -->
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/plugin.js"></script>
-
-    <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
-</body>
-
-</html>
+        <!-- end gallery -->
+        <!--  contact -->
+        <div class="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2>Contact Us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6  padding_right0">
+                        <div class="map_main">
+                            <div class="map-responsive">
+                                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="453" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 padding_left0">
+                        <form id="request" class="main_form">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <input class="contactus" placeholder="Name" type="type" name="Name">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Phone" type="type" name="Phone">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Email" type="type" name="Email">
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea class="textarea" placeholder="Message" type="type" Message="Message">Message</textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="send_btn">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end contact -->
+    </jsp:body>
+</tag:layout>
