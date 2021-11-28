@@ -61,8 +61,7 @@ public class FruitController {
         model.addAttribute("categories", categoryService.getAllCategories());
         return "fruits";
     }
-
-
+    
     @GetMapping(path = "/description/{value}")
     public @ResponseBody Iterable<Fruit> descriptionAlreadyExists(@PathVariable(name="value") String value)
     {
