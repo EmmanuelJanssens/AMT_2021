@@ -16,7 +16,7 @@ public class ItemService {
     FruitRepository fruitRepository;
 
     public void addToCart(String fruitId, int quantity) {
-        Optional<Item> it = itemRepository.findUserFruitAndKart("admin", fruitRepository.findById(fruitId).get());
+        Optional<Item> it = itemRepository.findUserFruitAndCart("admin", fruitRepository.findById(fruitId).get());
         if (it.isPresent()) {
             Item item1 = it.get();
             item1.addSeveralFruit(quantity);
@@ -43,7 +43,7 @@ public class ItemService {
 
     // by user?
     public void deleteAllItemsByUser(String user){
-        Iterable<Item> itemsToDelete = itemRepository.findUserKart(user);
+        Iterable<Item> itemsToDelete = itemRepository.findUserCart(user);
         for(Item i : itemsToDelete){
             deleteItemById(i.getId());
         }
