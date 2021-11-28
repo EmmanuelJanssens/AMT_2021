@@ -15,16 +15,30 @@ public class ItemService {
     @Autowired
     FruitRepository fruitRepository;
 
-    public void addToCart(String fruitId, int quantity) {
+    public Item manageCartQuantity(String fruitId, int quantity) {
+        Item item;
         Optional<Item> it = itemRepository.findUserFruitAndCart("admin", fruitRepository.findById(fruitId).get());
         if (it.isPresent()) {
-            Item item1 = it.get();
-            item1.addSeveralFruit(quantity);
-            itemRepository.save(item1);
+            item = it.get();
+            item.addSeveralFruit(quantity);
+            itemRepository.save(item);
 
         } else {
-            Item item = new Item("admin", fruitRepository.findById(fruitId).get(), quantity);
+            item = new Item("admin", fruitRepository.findById(fruitId).get(), quantity);
             itemRepository.save(item);
+        }
+
+        return item;
+    }
+
+    public void addToCart(String fruitId, int quantity) {
+        manageCartQuantity(fruitId, quantity);
+    }
+
+    public void removeFromCart(String fruitId, int quantity) {
+        Item item = manageCartQuantity(fruitId, -quantity);
+        if (item.getQuantity() < 1) {
+            deleteItemById(item.getId());
         }
     }
 
