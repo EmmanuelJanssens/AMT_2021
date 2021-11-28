@@ -33,19 +33,6 @@ public class ItemService {
 
     public void addToCart(String fruitId, int quantity) {
         manageCartQuantity(fruitId, quantity);
-//        Optional<Item> it = itemRepository.findUserFruitAndCart("admin", fruitRepository.findById(fruitId).get());
-//        if (it.isPresent()) {
-//            Item item1 = it.get();
-//            item1.addSeveralFruit(quantity);
-//            if (item1.getQuantity() <= 0) {
-//                deleteItemById(it.id());
-//            }
-//            itemRepository.save(item1);
-//
-//        } else {
-//            Item item = new Item("admin", fruitRepository.findById(fruitId).get(), quantity);
-//            itemRepository.save(item);
-//        }
     }
 
     public void removeFromCart(String fruitId, int quantity) {
