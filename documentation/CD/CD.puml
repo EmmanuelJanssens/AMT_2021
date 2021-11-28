@@ -9,6 +9,11 @@ class Fruit <<entity>>{
 -String image
 +Fruit(String name)
 -Fruit()
++addCategory(Category c)
++deleteCategory(Category c)
++removeQuantity()
++deleteCategories()
++setCategories(Set<Category> categories)
 }
 class Item <<entity>>{
 -Long id
@@ -17,7 +22,6 @@ class Item <<entity>>{
 -int quantity
 +Item(String username, Fruit fruit, int quantity)
 -Item()
-+addUniqueFruit()
 +addSeveralFruit(int quantity)
 
 
@@ -25,9 +29,10 @@ class Item <<entity>>{
 class Category <<entity>>{
 -string name
 +Category()
++setFruits(Set<Fruit fruits)
 }
 
 
-Item "1"- "*" Fruit : contains >
+Item "*"- "1" Fruit : contains >
 Fruit "*"- "*" Category : has >
 @enduml

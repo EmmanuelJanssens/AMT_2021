@@ -43,9 +43,6 @@ public class Item {
     public void addSeveralFruit(int quantity){
         this.quantity+=quantity;
     }
-    public void addUniqueFruit(){
-        this.quantity+=1;
-    }
 
     @Override
     public String toString() {
