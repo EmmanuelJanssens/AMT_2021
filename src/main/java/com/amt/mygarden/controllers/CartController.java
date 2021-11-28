@@ -27,7 +27,7 @@ public class CartController {
    @GetMapping
     public String viewItems(Model model){
 
-        model.addAttribute("allItems",itemRepository.findUserKart("admin"));
+        model.addAttribute("allItems",itemRepository.findUserCart("admin"));
 
         return "cart";
     }
