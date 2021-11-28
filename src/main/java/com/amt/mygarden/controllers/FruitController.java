@@ -90,7 +90,7 @@ public class FruitController {
 
     @DeleteMapping(path = "/{id}/remove-from-cart")
     public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
-        itemService.addToCart(id, -quantity);
+        itemService.removeFromCart(id, quantity);
         return "redirect:/cart";
     }
 }
