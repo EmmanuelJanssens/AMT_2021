@@ -48,7 +48,6 @@
                 var currentVal = parseInt(input.val());
                 if (!isNaN(currentVal)) {
                     if(type === 'minus') {
-
                         if(currentVal > input.attr('min')) {
                             $.post("${pageContext.request.contextPath}/fruits/"+fieldName+"/remove-from-cart", {_method: "delete"})
                                 .done(() => {
