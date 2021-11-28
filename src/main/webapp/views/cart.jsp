@@ -53,7 +53,7 @@
                                 .done(() => {
                                     input.val(currentVal - 1).change();
                                     if (currentVal <= 1) {
-                                        $(this).attr('disabled', true);
+                                        $(this).closest('tr').remove();
                                     }
                                 })
                         }
