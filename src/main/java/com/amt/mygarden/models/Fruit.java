@@ -67,4 +67,11 @@ public class Fruit {
         categories.clear();
     }
 
+    public void setCategories(Set<Category> categories){
+        deleteCategories();
+        for (Category category : categories){
+            addCategory(category);
+        }
+    }
+
 }
