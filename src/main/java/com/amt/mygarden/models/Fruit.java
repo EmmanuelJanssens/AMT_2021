@@ -55,12 +55,23 @@ public class Fruit {
         c.getFruits().remove(this);
         this.categories.remove(c);
     }
-
+    public void removeQuantity(){
+        if(this.quantity!=0){
+            this.quantity-=1;
+        }
+    }
     public void deleteCategories(){
         for (Category category : getCategories()){
             category.getFruits().remove(this);
         }
         categories.clear();
+    }
+
+    public void setCategories(Set<Category> categories){
+        deleteCategories();
+        for (Category category : categories){
+            addCategory(category);
+        }
     }
 
 }

@@ -22,4 +22,12 @@ public class Category {
     @ManyToMany(mappedBy = "categories", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Fruit> fruits = new HashSet<>();
 
+    public void setFruits(Set<Fruit> fruits) {
+        for (Fruit fruit : getFruits()) {
+            fruit.deleteCategory(this);
+        }
+        for (Fruit fruit : fruits) {
+            fruit.addCategory(this);
+        }
+    }
 }

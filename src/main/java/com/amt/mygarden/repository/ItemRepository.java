@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query("SELECT i FROM Item i where i.username = ?1")
-    Iterable<Item> findUserKart(String username);
+    Iterable<Item> findUserCart(String username);
     @Query("SELECT i FROM Item i where i.username = ?1 AND i.fruit=?2")
-    Optional<Item> findUserFruitAndKart(String username, Fruit fruit);
+    Optional<Item> findUserFruitAndCart(String username, Fruit fruit);
 
 }
