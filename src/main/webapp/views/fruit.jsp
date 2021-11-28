@@ -1,5 +1,6 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <tag:layout>
     <jsp:attribute name="css">
@@ -124,14 +125,21 @@
                         <div class="m-bot15"> <strong>Price : </strong> <span class="pro-price">${fruit.price} CHF</span></div>
                         <%-- todo: implement logic --%>
                         <!-- start of addToCart -->
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="quantiy" placeholder="1" class="form-control quantity">
-                        </div>
-                        <p>
-                            <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                        </p>
-                        <!-- end of addToCart -->
+                        <c:if  test="${fruit.quantity > 0 && fruit.price > 0}">
+                            <form:form action="${pageContext.request.contextPath}/fruits/${fruit.name}/add-to-cart"
+                                       method="POST"
+                                       modelAttribute="fruit"
+                                       id="addToCartForm"
+                            >
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" id="quantity" name="quantity" placeholder="quantity" min="1" class="form-control quantity">
+                                </div>
+                                <p>
+                                    <button type="submit" class="btn btn-round btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </p>
+                            </form:form>
+                        </c:if>
                     </div>
                 </div>
             </section>

@@ -6,9 +6,11 @@ import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.service.CategoryService;
 import com.amt.mygarden.service.FruitService;
 
+import com.amt.mygarden.service.ItemService;
 import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,8 @@ public class FruitController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ItemService itemService;
 
     @Autowired
     ServletContext context;
@@ -74,10 +78,20 @@ public class FruitController {
         model.addAttribute("fruit", fruitService.getASingleFruit(id));
         return "fruit";
     }
-
+    @PostMapping(path = "/{id}/add-to-cart")
+    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
+        itemService.addToCart(id, quantity);
+        return "redirect:/cart";
+    }
     @GetMapping(path = "/delete/{id}")
     public String deleteFruit(@PathVariable String id) {
         fruitService.deleteFruitById(id);
         return "redirect:/fruits";
+    }
+
+    @DeleteMapping(path = "/{id}/remove-from-cart")
+    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
+        itemService.addToCart(id, -quantity);
+        return "redirect:/cart";
     }
 }

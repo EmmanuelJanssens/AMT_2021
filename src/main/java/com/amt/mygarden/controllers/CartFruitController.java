@@ -26,7 +26,7 @@ public class CartFruitController {
         // @RequestParam means it is a parameter from the GET or POST request
         final RedirectView redirectView = new RedirectView("/", true);
 
-        Optional<Item> it=itemRepository.findUserFruitAndKart("admin",fruitRepository.findById(fruitId).get());
+        Optional<Item> it=itemRepository.findUserFruitAndCart("admin",fruitRepository.findById(fruitId).get());
         if(it.isPresent()){
             Item item1=it.get();
             item1.addSeveralFruit(Integer.valueOf(fruitAmount));
