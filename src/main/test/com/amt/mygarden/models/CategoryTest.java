@@ -1,5 +1,7 @@
 package com.amt.mygarden.models;
 
+import com.amt.mygarden.models.Category;
+import com.amt.mygarden.models.Fruit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
