@@ -1,0 +1,69 @@
+@startuml
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+
+class  FruitController <<application>>{
++addFruitsToCart(String id, String quantity)
++viewFruits(Model model)
++getFruit(String id, Model model)
+}
+
+class Item <<model>>{
+-Long id
+-String username
+-Fruit fruit
+-int quantity
++Item(String username, Fruit fruit, int quantity)
+-Item()
++addSeveralFruit(int quantity)
+
+
+
+}
+class FruitService<<service>>{
++getAllFruits()
++getASingleFruit(String id)
+
+}
+class ItemService<<service>>{
++addToCart(String id, int quantity)
+
+}
+class CategoryService<<service>>{
++getAllCategories()
+
+
+}
+interface ItemRepository<<repository>>{
++findUserFruitAndCart(String username, fruit)
++save(item)
+}
+interface FruitRepository<<repository>>{
++findById(String id)
++findAll()
+}
+interface CategoryRepository<<repository>>{
++findAll()
+}
+
+
+
+
+FruitController --> FruitService
+FruitController --> ItemService
+FruitController --> CategoryService
+
+ItemService --> Item
+ItemService --> ItemRepository
+
+CategoryService --> CategoryRepository
+
+FruitService --> FruitRepository
+
+
+
+@enduml

@@ -125,6 +125,7 @@
                         <div class="m-bot15"> <strong>Price : </strong> <span class="pro-price">${fruit.price} CHF</span></div>
                         <%-- todo: implement logic --%>
                         <!-- start of addToCart -->
+
                         <c:if  test="${fruit.quantity > 0 && fruit.price > 0}">
                             <form:form action="${pageContext.request.contextPath}/fruits/${fruit.name}/add-to-cart"
                                        method="POST"
