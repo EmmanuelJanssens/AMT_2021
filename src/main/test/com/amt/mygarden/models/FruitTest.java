@@ -113,9 +113,6 @@ class FruitTest {
         set.add(category1);
         fruit.setCategories(set);
         assertEquals(set, fruit.getCategories());
-        for (Category category : fruit.getCategories()){
-            assertTrue(category.getFruits().contains(fruit));
-        }
     }
 
     @Test
