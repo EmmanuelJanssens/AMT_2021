@@ -28,7 +28,12 @@ public class CartController {
 
    @GetMapping
     public String viewItems(Model model, HttpServletRequest request){
-        model.addAttribute("allItems",itemRepository.findUserCart(request.getSession().getId()));
+       if(request.getSession().getAttribute("username")==null){
+           model.addAttribute("allItems",itemRepository.findUserCart(request.getSession().getId()));
+       }else{
+           model.addAttribute("allItems",itemRepository.findUserCart(request.getSession().getAttribute("username").toString()));
+       }
+
 
         return "cart";
     }
@@ -41,8 +46,12 @@ public class CartController {
 
 
     @GetMapping(path = "/delete/all")
-    public String deleteAllItems() {
-        itemService.deleteAllItemsByUser("admin");
+    public String deleteAllItems(HttpServletRequest request) {
+        if(request.getSession().getAttribute("username")==null){
+            itemService.deleteAllItemsByUser(request.getSession().getId());
+        }else {
+            itemService.deleteAllItemsByUser(request.getSession().getAttribute("username").toString());
+        }
         return "redirect:/cart";
     }
 }

@@ -80,7 +80,11 @@ public class FruitController {
     }
     @PostMapping(path = "/{id}/add-to-cart")
     public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
-        itemService.addToCart(id, quantity,request.getSession().getId());
+        if(request.getSession().getAttribute("username")==null){
+            itemService.addToCart(id, quantity,request.getSession().getId());
+        }else {
+            itemService.addToCart(id, quantity, request.getSession().getAttribute("username").toString());
+        }
         return "redirect:/cart";
     }
     @GetMapping(path = "/delete/{id}")
@@ -91,7 +95,11 @@ public class FruitController {
 
     @DeleteMapping(path = "/{id}/remove-from-cart")
     public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
-        itemService.removeFromCart(id, quantity,request.getSession().getId());
+        if(request.getSession().getAttribute("username")==null){
+            itemService.removeFromCart(id, quantity,request.getSession().getId());
+        }else {
+            itemService.removeFromCart(id, quantity, request.getSession().getAttribute("username").toString());
+        }
         return "redirect:/cart";
     }
 }
