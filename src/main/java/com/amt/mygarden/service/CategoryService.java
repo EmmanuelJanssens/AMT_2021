@@ -1,14 +1,10 @@
 package com.amt.mygarden.service;
 
 import com.amt.mygarden.models.Category;
-import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -35,4 +31,20 @@ public class CategoryService {
         }
 
     }
+
+    public void deleteCategoryById(String id) {
+        Category category;
+        try {
+            category = getCategoryById(id);
+        } catch (Exception e){
+            return;
+        }
+        category.deleteFruits();
+        categoryRepository.delete(category);
+    }
+
+    public Iterable<Category> getAllUsedCategories() {
+        return categoryRepository.findCategoriesByFruitsNotNull();
+    }
+
 }

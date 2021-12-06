@@ -45,16 +45,6 @@
                     alert.removeClass('alert alert-dark')
                     alert.text("")
                     form.submit()
-                    /*await $.get("${pageContext.request.contextPath}/category" + name, function (data) {
-                        if (data.length > 0) {
-                            alert.text(data[0].name + " Has already the same name")
-                            alert.addClass('alert alert-dark')
-                        } else {
-                            alert.removeClass('alert alert-dark')
-                            alert.text("")
-                            form.submit()
-                        }
-                    });*/
                 }
             }
         </script>

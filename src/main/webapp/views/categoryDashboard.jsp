@@ -78,7 +78,9 @@
                                 </c:forEach>
                             </td>
                             <td>
-                                <a href="${pageContext.request.contextPath }/categories/delete/${category.name}" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="${pageContext.request.contextPath }/categoryDashboard/delete/${category.name}"
+                                   onclick="return confirm('Are you sure?\nThe affected fruits will be :' +
+                                           ' ${category.fruitsAsString}')">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>
