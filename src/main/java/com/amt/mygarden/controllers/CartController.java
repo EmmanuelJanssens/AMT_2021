@@ -4,6 +4,7 @@ import com.amt.mygarden.repository.ItemRepository;
 import com.amt.mygarden.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(path="/cart")
@@ -25,9 +27,8 @@ public class CartController {
     ServletContext context;
 
    @GetMapping
-    public String viewItems(Model model){
-
-        model.addAttribute("allItems",itemRepository.findUserCart("admin"));
+    public String viewItems(Model model, HttpServletRequest request){
+        model.addAttribute("allItems",itemRepository.findUserCart(request.getSession().getId()));
 
         return "cart";
     }
