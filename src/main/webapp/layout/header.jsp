@@ -33,6 +33,9 @@
                                     <!--TODO display only if logged in a s admin-->
                                     <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
