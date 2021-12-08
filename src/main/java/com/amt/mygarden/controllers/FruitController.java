@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 import org.springframework.ui.ModelMap;
@@ -78,8 +79,12 @@ public class FruitController {
         return "fruit";
     }
     @PostMapping(path = "/{id}/add-to-cart")
-    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
-        itemService.addToCart(id, quantity);
+    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
+        if(request.getSession().getAttribute("username")==null){
+            itemService.addToCart(id, quantity,request.getSession().getId());
+        }else {
+            itemService.addToCart(id, quantity, request.getSession().getAttribute("username").toString());
+        }
         return "redirect:/cart";
     }
     @GetMapping(path = "/delete/{id}")
@@ -89,8 +94,12 @@ public class FruitController {
     }
 
     @DeleteMapping(path = "/{id}/remove-from-cart")
-    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
-        itemService.removeFromCart(id, quantity);
+    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
+        if(request.getSession().getAttribute("username")==null){
+            itemService.removeFromCart(id, quantity,request.getSession().getId());
+        }else {
+            itemService.removeFromCart(id, quantity, request.getSession().getAttribute("username").toString());
+        }
         return "redirect:/cart";
     }
 }
