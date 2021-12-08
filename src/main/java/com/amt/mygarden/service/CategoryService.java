@@ -22,10 +22,9 @@ public class CategoryService {
 
     public Category AddCategory(Category category) throws IOException {
 
-        if(categoryRepository.findCategoryByName(category.getName()) != null){
+        if (categoryRepository.findCategoryByName(category.getName()) != null) {
             return category;
-        }
-        else{
+        } else {
             categoryRepository.save(category);
             return null;
         }
@@ -36,7 +35,7 @@ public class CategoryService {
         Category category;
         try {
             category = getCategoryById(id);
-        } catch (Exception e){
+        } catch (Exception e) {
             return;
         }
         category.deleteFruits();
@@ -44,7 +43,7 @@ public class CategoryService {
     }
 
     public Iterable<Category> getAllUsedCategories() {
-        return categoryRepository.findCategoriesByFruitsNotNull();
+        return categoryRepository.findDistinctByFruitsNotNull();
     }
 
 }
