@@ -1,5 +1,6 @@
 package com.amt.mygarden.service;
 
+import com.amt.mygarden.exceptions.FruitNotFoundException;
 import com.amt.mygarden.models.Category;
 import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.models.Item;
@@ -33,7 +34,7 @@ public class FruitService {
 
     // TODO throw ResourceNotFound
     public Fruit getASingleFruit(String fruitId) throws Exception {
-        return fruitRepository.findById(fruitId).orElseThrow(() -> new Exception("fruit not found"));
+        return fruitRepository.findById(fruitId).orElseThrow(() -> new FruitNotFoundException("fruit not found"));
     }
 
     public Fruit AddFruit(Fruit fruit) throws IOException {
