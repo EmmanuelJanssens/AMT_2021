@@ -76,15 +76,6 @@
                 background-color: #53A3CD;
                 border-color: #53A3CD;
             }
-            .forgot-password {
-                text-decoration: underline;
-                color: #888;
-            }
-            .forgot-password:hover,
-            .forgot-password:focus {
-                text-decoration: underline;
-                color: #666;
-            }
 
             .btn-register {
                 background-color: #1CB94E;
@@ -147,7 +138,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                    <form id="login-form" method="post" role="form" style="display: block;">
                                         <div class="form-group">
                                             <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
@@ -162,15 +153,6 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">
                                                     <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="text-center">
-                                                        <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

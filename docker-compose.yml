@@ -8,6 +8,7 @@ services:
     environment:
       JPDA_ADDRESS: "*:8000"
       JPDA_TRANSPORT: dt_socket
+      SPRING_PROFILES_ACTIVE: dev
     depends_on:
       - "mygarden-mysql"
     volumes:

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "login-api.path",
+      "type": "java.lang.String",
+      "description": "path for login api"
+  }
+] }
