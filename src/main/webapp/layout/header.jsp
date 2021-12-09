@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- header -->
 <header class="full_bg">
     <!-- header inner -->
@@ -37,7 +38,11 @@
                                 <c:choose>
                                     <c:when test="${sessionScope.containsKey(\"username\")}">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">${sessionScope.username} </a>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="POST"
+                                            >
+                                                <button type="submit" class="">${sessionScope.username}</button>
+                                            </form:form>
                                         </li>
                                     </c:when>
                                     <c:otherwise>

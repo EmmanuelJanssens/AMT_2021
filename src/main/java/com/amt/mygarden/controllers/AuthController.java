@@ -3,8 +3,6 @@ package com.amt.mygarden.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -12,10 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -24,8 +22,18 @@ public class AuthController {
     String loginAPIPath;
 
     @GetMapping(path = "/login")
-    public String getLogin() {
+    public String getLogin(HttpServletRequest request) {
+        if (request.getSession().getAttribute("username") != null) {
+            // todo: send 403 error instead of redirect
+            return "redirect:/";
+        }
         return "login";
+    }
+
+    @PostMapping(path = "/logout")
+    public String logoutUser(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/";
     }
 
     @PostMapping(path = "/login")
