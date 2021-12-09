@@ -1,6 +1,7 @@
 package com.amt.mygarden.controllers;
 
 import com.amt.mygarden.models.Category;
+import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class CategoryController {
     @GetMapping(path = "used")
     public Iterable<Category> getUsedCategories() {
         return categories.findDistinctByFruitsNotNull();
+    }
+
+    @GetMapping(path = "/name/{value}")
+    public @ResponseBody Iterable<Category> descriptionAlreadyExists(@PathVariable(name="value") String value)
+    {
+        return categoryService.existsByName(value);
     }
 }

@@ -1,6 +1,7 @@
 package com.amt.mygarden.service;
 
 import com.amt.mygarden.models.Category;
+import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,10 @@ public class CategoryService {
 
     public Iterable<Category> getAllUsedCategories() {
         return categoryRepository.findDistinctByFruitsNotNull();
+    }
+
+    public Iterable<Category> existsByName(String name){
+        return categoryRepository.findCategoriesByName(name);
     }
 
 }

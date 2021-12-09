@@ -13,4 +13,6 @@ public interface CategoryRepository extends CrudRepository<Category, String> {
 
     Iterable<Category> findDistinctByFruitsNotNull();
 
+    Iterable<Category> findCategoriesByName(String name);
+
 }

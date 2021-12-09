@@ -38,13 +38,21 @@
         <%--            console.log("my script example")--%>
         <%--        </script>--%>
         <script>
-            const alert = $("#exists")
+            const alert = $("#nameExists")
+            const name = $("#categoryName")
             const form = $("#addCategoryForm")
             async function AddIfNameNotExist() {
                 if (form.valid()) {
-                    alert.removeClass('alert alert-dark')
-                    alert.text("")
-                    form.submit()
+                    await $.get("${pageContext.request.contextPath}/category/name/" + name.val(), function (data) {
+                        if (data.length > 0) {
+                            alert.text("Name already used")
+                            alert.addClass('alert alert-dark')
+                        } else {
+                            alert.removeClass('alert alert-dark')
+                            alert.text("")
+                            form.submit()
+                        }
+                    });
                 }
             }
         </script>
@@ -69,9 +77,10 @@
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            <form:input name="categoryName" placeholder="Name" class="form-control" type="text" path="name"
-                                        required="true"/>
+                            <form:input name="categoryName" id="categoryName" placeholder="Name"
+                                           class="form-control" type="text" path="name" required="true"/>
                         </div>
+                        <p id="nameExists"></p>
                     </div>
                 </div>
                 <div class="form-group form-inline">
