@@ -41,7 +41,7 @@
                                             <form:form action="${pageContext.request.contextPath}/logout"
                                                        method="POST"
                                             >
-                                                <button type="submit" class="">${sessionScope.username}</button>
+                                                <button type="submit" class="btn btn-light">${sessionScope.username}</button>
                                             </form:form>
                                         </li>
                                     </c:when>
