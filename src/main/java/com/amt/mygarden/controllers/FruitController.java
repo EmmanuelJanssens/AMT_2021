@@ -63,7 +63,7 @@ public class FruitController {
     @GetMapping
     public String viewFruits(Model model){
         model.addAttribute("allFruits",fruitService.getAllFruits());
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", categoryService.getAllUsedCategories());
         return "fruits";
     }
 
