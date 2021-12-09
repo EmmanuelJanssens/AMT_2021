@@ -1,18 +1,22 @@
 package com.amt.mygarden.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AuthController {
@@ -25,19 +29,38 @@ public class AuthController {
     }
 
     @PostMapping(path = "/login")
-    public @ResponseBody
-    String authenticateUSer(@RequestParam String username, @RequestParam String password) {
+    public String authenticateUSer(@RequestParam String username, @RequestParam String password, HttpServletRequest request, Model model) throws JsonProcessingException {
         String uri = loginAPIPath + "/auth/login";
-        String request = "{\"username\":\""+username+"\", \"password\":\""+password+"\"}";
+        String payload = "{\"username\":\""+username+"\", \"password\":\""+password+"\"}";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(request, headers);
+        HttpEntity<String> entity = new HttpEntity<>(payload, headers);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(uri, entity, String.class);
 
-        return response.toString();
+        if (response.getStatusCode() == HttpStatus.OK) {
+            String body = response.getBody();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode root = objectMapper.readTree(body);
+            JsonNode account = root.path("account");
+
+            // save into session
+            HttpSession session = request.getSession();
+            session.setAttribute("userid", account.get("id"));
+            session.setAttribute("username", account.get("username"));
+            session.setAttribute("role", account.get("role"));
+            session.setAttribute("token", root.get("token"));
+            return "redirect:/";
+        }
+        else if (response.getStatusCode() == HttpStatus.FORBIDDEN) {
+            model.addAttribute("error", "The credentials are incorrect");
+        }else {
+            model.addAttribute("error", "Unknow error please try again in a while");
+        }
+
+        return "login";
     }
 }
