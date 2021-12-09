@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header -->
 <header class="full_bg">
     <!-- header inner -->
@@ -33,9 +34,18 @@
                                     <!--TODO display only if logged in a s admin-->
                                     <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.containsKey(\"username\")}">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">${sessionScope.username} </a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>
                         </div>
                     </nav>
