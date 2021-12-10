@@ -10,7 +10,7 @@ Haute École d'Ingénierie et Gestion du Canton du Vaud
 # Logo
 
 
-![logo here](logo.jpg)
+![src\main\webapp\images\logo_mg.png](src\main\webapp\images\logo_mg.png)
 
 
 

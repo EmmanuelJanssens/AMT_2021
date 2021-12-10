@@ -38,14 +38,14 @@
         <%--            console.log("my script example")--%>
         <%--        </script>--%>
         <script>
-            const alert = $("#exists")
+            const alert = $("#descriptionExists")
             const description = $('#fruitDescription')
             const form = $("#addFruitForm")
             async function AddIfDescNotExist() {
                 if (form.valid()) {
                     await $.get("${pageContext.request.contextPath}/fruits/description/" + description.val(), function (data) {
                         if (data.length > 0) {
-                            alert.text(data[0].name + " Has allready the same description")
+                            alert.text(data[0].name + " Has already the same description")
                             alert.addClass('alert alert-dark')
                         } else {
                             alert.removeClass('alert alert-dark')
@@ -122,7 +122,7 @@
                             <form:textarea name="fruitDescription" id="fruitDescription" placeholder="Description"
                                            class="form-control" type="text" path="description" required="true"/>
                         </div>
-                        <p id="exists"></p>
+                        <p id="descriptionExists"></p>
                     </div>
                 </div>
                 <div class="form-group form-inline">

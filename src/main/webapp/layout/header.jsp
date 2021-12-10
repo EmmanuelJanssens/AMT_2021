@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- header -->
 <header class="full_bg">
     <!-- header inner -->
@@ -8,7 +10,7 @@
                     <div class="full">
                         <div class="center-desk">
                             <div class="logo">
-                                <a href="index.jsp"><img src="${pageContext.request.contextPath}/images/logo.png" alt="#"></a>
+                                <a href="index.jsp"><img src="${pageContext.request.contextPath}/images/logo_mg.png" alt="#"></a>
                             </div>
                         </div>
                     </div>
@@ -33,6 +35,22 @@
                                     <!--TODO display only if logged in a s admin-->
                                     <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
                                 </li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.containsKey(\"username\")}">
+                                        <li class="nav-item">
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="POST"
+                                            >
+                                                <button type="submit" class="btn btn-light">${sessionScope.username}</button>
+                                            </form:form>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>
                         </div>
                     </nav>
