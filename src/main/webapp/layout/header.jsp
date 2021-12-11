@@ -31,14 +31,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/cart">cart ${pageContext.request.contextPath}</a>
                                 </li>
+                                <c:if test="${pageContext.request.session.getAttribute('role')=='admin'}">
+
+
                                 <li class="nav-item">
-                                    <!--TODO display only if logged in a s admin-->
                                     <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
                                 </li>
                                 <li class="nav-item">
-                                    <!--TODO display only if logged in a s admin-->
                                     <a class="nav-link" href="${pageContext.request.contextPath}/categoryDashboard">categories-dashboard ${pageContext.request.contextPath} </a>
                                 </li>
+                                </c:if>
                                 <c:choose>
                                     <c:when test="${sessionScope.containsKey(\"username\")}">
                                         <li class="nav-item">
