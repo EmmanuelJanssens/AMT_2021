@@ -74,8 +74,9 @@
             box-shadow: none;
             border-color: #ccc;
         }
-        .btn-login {
-            background-color: #59B2E0;
+
+        .btn-register {
+            background-color: #1CB94E;
             outline: none;
             color: #fff;
             font-size: 14px;
@@ -83,13 +84,13 @@
             font-weight: normal;
             padding: 14px 0;
             text-transform: uppercase;
-            border-color: #59B2E6;
+            border-color: #1CB94A;
         }
-        .btn-login:hover,
-        .btn-login:focus {
+        .btn-register:hover,
+        .btn-register:focus {
             color: #fff;
-            background-color: #53A3CD;
-            border-color: #53A3CD;
+            background-color: #1CA347;
+            border-color: #1CA347;
         }
 
     </style>
@@ -110,10 +111,10 @@
                     <div class="panel-heading">
                         <div class="row justify-content-around">
                             <div class="col-xs-6">
-                                <a href="#" class="active" id="login-form-link">Login</a>
+                                <a href="${pageContext.request.contextPath}/login" id="login-form-link">Login</a>
                             </div>
                             <div class="col-xs-6">
-                                <a href="${pageContext.request.contextPath}/register" id="register-form-link">Register</a>
+                                <a href="#" class="active" id="register-form-link">Register</a>
                             </div>
                         </div>
                         <hr>
@@ -121,45 +122,26 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form:form id="login-form" method="post" role="form">
-                                    <c:if test="${logout != null}">
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <p>Successfully loged out</p>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </c:if>
+                                <form:form id="register-form" action="/register" method="post" role="form" modelAttribute="registerForm">
                                     <c:if test="${error != null}">
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <p>invalid credentials</p>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${new_account != null}">
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <p>Account successfull created</p>
+                                            <p>${error}</p>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                     </c:if>
                                     <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        <form:input path="username" cssClass="form-control" placeholder="Username"/>
+<%--                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">--%>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                        <form:input path="password" cssClass="form-control" placeholder="Password"/>
                                     </div>
-                                    <%--                                        <div class="form-group text-center">--%>
-                                    <%--                                            <input type="checkbox" tabindex="3" class="" name="remember" id="remember">--%>
-                                    <%--                                            <label for="remember"> Remember Me</label>--%>
-                                    <%--                                        </div>--%>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
                                             </div>
                                         </div>
                                     </div>
