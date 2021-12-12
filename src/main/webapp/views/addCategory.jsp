@@ -70,6 +70,7 @@
                        enctype="multipart/form-data"
                        id="addCategoryForm"
                        class="well form-horizontal"
+                       onkeydown="return event.key != 'Enter';"
             >
                 <!--TODO change to file-->
                 <div class="form-group form-inline">
