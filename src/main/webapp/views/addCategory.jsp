@@ -44,15 +44,13 @@
             async function AddIfNameNotExist() {
                 if (form.valid()) {
                     await $.get("${pageContext.request.contextPath}/category/name/" + name.val(), function (data) {
-                        if (data.length > 0) {
-                            alert.text("Name already used")
-                            alert.addClass('alert alert-dark')
-                        } else {
-                            alert.removeClass('alert alert-dark')
-                            alert.text("")
-                            form.submit()
-                        }
-                    });
+                        alert.text("Already exists")
+                        alert.addClass('alert alert-dark')
+                    }).catch(e => {
+                        alert.removeClass('alert alert-dark')
+                        alert.text("")
+                        form.submit()
+                    })
                 }
             }
         </script>
@@ -85,7 +83,7 @@
                     </div>
                 </div>
                 <div class="form-group form-inline">
-                    <input type="button" class="btn btn-secondary" onclick="location.href='/categoryDashboard'" value="Close"/>
+                    <a class="btn btn-secondary btn" href="${pageContext.request.contextPath}/admin/categoryDashboard" >Close</a>
                     <input type="button" id="addCategoryBtn" class="btn btn-primary" onclick="AddIfNameNotExist()" value="Add"/>
                 </div>
             </form:form>

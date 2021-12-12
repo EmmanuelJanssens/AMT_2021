@@ -55,8 +55,8 @@
                     <thead>
                     <tr>
                         <th colspan="6">
-                            <button onclick="location.href='/categoryDashboard/add'"  class="col-sm-12 btn-primary"type="button">
-                                AddCategory</button>
+                            <a href="${pageContext.request.contextPath}/admin/categoryDashboard/add"  class="col-sm-12 btn-primary btn"type="button">
+                                AddCategory</a>
                         </th>
                     </tr>
                     <tr>
@@ -78,7 +78,7 @@
                                 </c:forEach>
                             </td>
                             <td>
-                                <a href="${pageContext.request.contextPath }/categoryDashboard/delete/${category.name}"
+                                <a href="${pageContext.request.contextPath }:/admin/categoryDashboard/delete/${category.name}"
                                    onclick="return confirm('Are you sure?\nThe affected fruits will be :' +
                                            ' ${category.fruitsAsString}')">Delete</a>
                             </td>

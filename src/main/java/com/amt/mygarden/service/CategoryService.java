@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -47,7 +48,7 @@ public class CategoryService {
         return categoryRepository.findDistinctByFruitsNotNull();
     }
 
-    public Iterable<Category> existsByName(String name){
+    public Optional<Category> existsByName(String name){
         return categoryRepository.findCategoriesByName(name);
     }
 

@@ -38,7 +38,7 @@ public class FruitService {
 
     public Fruit AddFruit(Fruit fruit) throws IOException {
 
-        if(fruitRepository.findFruitsByDescription(fruit.getDescription()).iterator().hasNext()){
+        if(fruitRepository.findFruitsByDescription(fruit.getDescription()).isPresent()){
             return fruit;
         }
         else{
@@ -83,7 +83,7 @@ public class FruitService {
     public Iterable<Fruit> getFruitsByCategory(String category) {
         return fruitRepository.findFruitsByCategoriesContaining(categoryRepository.findCategoryByName(category));
     }
-    public Iterable<Fruit> existsByDescription(String desc){
+    public Optional<Fruit> existsByDescription(String desc){
         return fruitRepository.findFruitsByDescription(desc);
     }
     public void removeQuantity(String id) {

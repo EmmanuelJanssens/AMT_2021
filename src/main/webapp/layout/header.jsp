@@ -37,8 +37,10 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="<c:url value='/admin/dashboard' />">Dashboard</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<c:url value='/admin/categoryDashboard' />">Category Dashboard</a>
+                                        </li>
                                     </sec:authorize>
-
                                     <li class="nav-item">
                                         <form:form action="/logout"
                                                    method="POST"

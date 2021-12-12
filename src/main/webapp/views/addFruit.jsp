@@ -44,14 +44,12 @@
             async function AddIfDescNotExist() {
                 if (form.valid()) {
                     await $.get("${pageContext.request.contextPath}/fruits/description/" + description.val(), function (data) {
-                        if (data.length > 0) {
-                            alert.text(data[0].name + " Has already the same description")
-                            alert.addClass('alert alert-dark')
-                        } else {
-                            alert.removeClass('alert alert-dark')
-                            alert.text("")
-                            form.submit()
-                        }
+                        alert.text(data.name + " Has already the same description")
+                        alert.addClass('alert alert-dark')
+                    }).catch(e =>{
+                        alert.removeClass('alert alert-dark')
+                        alert.text("")
+                        form.submit()
                     });
                 }
             }

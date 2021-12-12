@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/categoryDashboard")
+@RequestMapping("/admin/categoryDashboard")
 public class CategoryDashBoardController {
 
     @Autowired
@@ -39,6 +39,6 @@ public class CategoryDashBoardController {
     @GetMapping(path = "/delete/{id}")
     public String deleteCategory(@PathVariable String id) {
         categoryService.deleteCategoryById(id);
-        return "redirect:/categoryDashboard";
+        return "redirect:/admin/categoryDashboard";
     }
 }

@@ -8,6 +8,8 @@ import com.amt.mygarden.service.FruitService;
 
 import com.amt.mygarden.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -15,6 +17,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -61,9 +64,18 @@ public class FruitController {
     }
 
     @GetMapping(path = "/description/{value}")
-    public @ResponseBody Iterable<Fruit> descriptionAlreadyExists(@PathVariable(name="value") String value)
+    public @ResponseBody ResponseEntity descriptionAlreadyExists(@PathVariable(name="value") String value)
     {
-        return fruitService.existsByDescription(value);
+        Optional<Fruit> result = fruitService.existsByDescription(value);
+        if(result.isPresent()){
+
+            Fruit f = new Fruit();
+            f.setName(result.get().getName());
+            return new ResponseEntity(f, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(path="/{id}")
