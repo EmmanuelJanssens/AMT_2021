@@ -138,7 +138,7 @@
                     />
                 </div>
                 <div class="form-group form-inline">
-                    <input type="button" class="btn btn-secondary" onclick="location.href='/dashboard'" value="Close"/>
+                    <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-secondary">Close</a>
                     <input type="button" id="addFruitBtn" class="btn btn-primary" onclick="AddIfDescNotExist()" value="Add"/>
                 </div>
             </form:form>

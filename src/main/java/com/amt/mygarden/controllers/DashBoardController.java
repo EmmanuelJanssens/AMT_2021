@@ -9,11 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping("/admin/dashboard")
 public class DashBoardController {
-
-
-
 
     @Autowired
     CategoryRepository categories;
@@ -21,12 +18,8 @@ public class DashBoardController {
     @Autowired
     FruitService fruits;
 
-
-
-
     @GetMapping
     public String viewDashboard(Model model){
-
         model.addAttribute("allFruits",fruits.getAllFruits());
         return "dashboard";
     }
@@ -44,6 +37,6 @@ public class DashBoardController {
     @GetMapping(path = "/delete/{id}")
     public String deleteFruit(@PathVariable String id) {
         fruits.deleteFruitById(id);
-        return "redirect:/dashboard";
+        return "redirect:/admin/dashboard";
     }
 }

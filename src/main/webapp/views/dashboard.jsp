@@ -55,8 +55,8 @@
                     <thead>
                     <tr>
                         <th colspan="6">
-                            <button onclick="location.href='/dashboard/add'"  class="col-sm-12 btn-primary"type="button">
-                                AddFruit</button>
+                            <a href="${pageContext.request.contextPath}/admin/dashboard/add"  class="col-sm-12 btn btn-primary">
+                                AddFruit</a>
                         </th>
                     </tr>
                     <tr>
@@ -85,7 +85,7 @@
                             <td class="white_font">${fruit.quantity}</td>
                             <td class="white_font">${fruit.description}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath }/dashboard/delete/${fruit.name}" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="${pageContext.request.contextPath }/admin/dashboard/delete/${fruit.name}" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
 
                         </tr>

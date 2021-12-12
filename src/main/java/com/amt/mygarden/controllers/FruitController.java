@@ -7,12 +7,7 @@ import com.amt.mygarden.service.CategoryService;
 import com.amt.mygarden.service.FruitService;
 
 import com.amt.mygarden.service.ItemService;
-import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -20,11 +15,8 @@ import javax.servlet.ServletContext;
 import java.io.IOException;
 
 import org.springframework.ui.ModelMap;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/fruits") // This means URL's start with /demo (after Application path)
@@ -55,7 +47,7 @@ public class FruitController {
             model.addAttribute("fruit",fruit);
             model.addAttribute("allFruitCategories",categories.findAll());
         }
-        redirect = new ModelAndView("redirect:/dashboard",model);
+        redirect = new ModelAndView("redirect:/admin/dashboard",model);
         return redirect;
     }
 
