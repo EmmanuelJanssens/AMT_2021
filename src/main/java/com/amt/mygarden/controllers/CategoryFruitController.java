@@ -21,7 +21,7 @@ public class CategoryFruitController {
     public String getCategoryFruits(@PathVariable String categoryId, Model model) throws Exception {
         Category category = categoryService.getCategoryById(categoryId);
         model.addAttribute("allFruits", fruitRepository.findFruitsByCategoriesContaining(category));
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", categoryService.getAllUsedCategories());
         return "fruits";
     }
 }

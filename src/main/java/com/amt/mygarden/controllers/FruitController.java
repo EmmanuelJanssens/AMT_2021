@@ -7,24 +7,21 @@ import com.amt.mygarden.service.CategoryService;
 import com.amt.mygarden.service.FruitService;
 
 import com.amt.mygarden.service.ItemService;
-import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.ui.ModelMap;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/fruits") // This means URL's start with /demo (after Application path)
@@ -55,21 +52,30 @@ public class FruitController {
             model.addAttribute("fruit",fruit);
             model.addAttribute("allFruitCategories",categories.findAll());
         }
-        redirect = new ModelAndView("redirect:/dashboard",model);
+        redirect = new ModelAndView("redirect:/admin/dashboard",model);
         return redirect;
     }
 
     @GetMapping
     public String viewFruits(Model model){
         model.addAttribute("allFruits",fruitService.getAllFruits());
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", categoryService.getAllUsedCategories());
         return "fruits";
     }
 
     @GetMapping(path = "/description/{value}")
-    public @ResponseBody Iterable<Fruit> descriptionAlreadyExists(@PathVariable(name="value") String value)
+    public @ResponseBody ResponseEntity descriptionAlreadyExists(@PathVariable(name="value") String value)
     {
-        return fruitService.existsByDescription(value);
+        Optional<Fruit> result = fruitService.existsByDescription(value);
+        if(result.isPresent()){
+
+            Fruit f = new Fruit();
+            f.setName(result.get().getName());
+            return new ResponseEntity(f, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(path="/{id}")
@@ -78,8 +84,15 @@ public class FruitController {
         return "fruit";
     }
     @PostMapping(path = "/{id}/add-to-cart")
-    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
-        itemService.addToCart(id, quantity);
+    public String addFruitsToCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        String user = request.getSession().getId();
+        if (principal != null) {
+            user = principal.getName();
+        }
+
+        itemService.addToCart(id, quantity, user);
+
         return "redirect:/cart";
     }
     @GetMapping(path = "/delete/{id}")
@@ -89,8 +102,14 @@ public class FruitController {
     }
 
     @DeleteMapping(path = "/{id}/remove-from-cart")
-    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity) {
-        itemService.removeFromCart(id, quantity);
+    public String removeFruitFromCart(@PathVariable String id, @RequestParam(defaultValue = "1") int quantity, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        String user = request.getSession().getId();
+        if (principal != null) {
+            user = principal.getName();
+        }
+
+        itemService.removeFromCart(id, quantity, user);
         return "redirect:/cart";
     }
 }

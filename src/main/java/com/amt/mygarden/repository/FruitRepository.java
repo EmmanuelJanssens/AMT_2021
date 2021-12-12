@@ -8,6 +8,7 @@ import com.amt.mygarden.models.Fruit;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FruitRepository extends CrudRepository<Fruit, String>{
@@ -15,5 +16,5 @@ public interface FruitRepository extends CrudRepository<Fruit, String>{
     Iterable<Fruit> findFruitsByCategoriesContaining(Category c);
 
 
-    Iterable<Fruit> findFruitsByDescription(String description);
+    Optional<Fruit> findFruitsByDescription(String description);
 }

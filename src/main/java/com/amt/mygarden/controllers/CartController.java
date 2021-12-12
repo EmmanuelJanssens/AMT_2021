@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 @RequestMapping(path="/cart")
@@ -25,10 +27,13 @@ public class CartController {
     ServletContext context;
 
    @GetMapping
-    public String viewItems(Model model){
-
-        model.addAttribute("allItems",itemRepository.findUserCart("admin"));
-
+    public String viewItems(Model model, HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        String user = request.getSession().getId();
+        if (principal != null) {
+            user = principal.getName();
+        }
+        model.addAttribute("allItems",itemRepository.findUserCart(user));
         return "cart";
     }
 
@@ -40,8 +45,14 @@ public class CartController {
 
 
     @GetMapping(path = "/delete/all")
-    public String deleteAllItems() {
-        itemService.deleteAllItemsByUser("admin");
+    public String deleteAllItems(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        String user = request.getSession().getId();
+        if (principal != null) {
+            user = principal.getName();
+        }
+        itemService.deleteAllItemsByUser(user);
+
         return "redirect:/cart";
     }
 }

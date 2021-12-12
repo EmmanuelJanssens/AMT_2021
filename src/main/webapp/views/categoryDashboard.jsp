@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: emman
+  User: ferra
   Date: 08/11/2021
   Time: 10:11
   To change this template use File | Settings | File Templates.
@@ -42,12 +42,12 @@
     </jsp:attribute>
     <jsp:body>
 
-        <div id="fruits" class="section dark_bg layout_padding ">
+        <div id="categories" class="section dark_bg layout_padding ">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="heading full text_align_center">
-                            <h2 class="white_font full text_align_center">Our Fruits</h2>
+                            <h2 class="white_font full text_align_center">Our Categories</h2>
                         </div>
                     </div>
                 </div>
@@ -55,39 +55,33 @@
                     <thead>
                     <tr>
                         <th colspan="6">
-                            <a href="${pageContext.request.contextPath}/admin/dashboard/add"  class="col-sm-12 btn btn-primary">
-                                AddFruit</a>
+                            <a href="${pageContext.request.contextPath}/admin/categoryDashboard/add"  class="col-sm-12 btn-primary btn"type="button">
+                                AddCategory</a>
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col">image</th>
                         <th scope="col">name</th>
-                        <th scope="col">price</th>
-                        <th scope="col">quantity</th>
-                        <th scope="col">description</th>
+                        <th scope="col">fruits</th>
                         <th scope="col">delete</th>
                     </tr>
                     </thead>
                     <tbody id="fruits-body">
 
 
-                        <%--@elvariable id="fruit" type="com.amt.mygarden.models.Fruit"--%>
-                    <c:forEach var="fruit" items="${allFruits}">
+                        <%--@elvariable id="category" type="com.amt.mygarden.models.Category"--%>
+                    <c:forEach var="category" items="${allCategories}">
                         <tr>
-                            <td><img
-                                    style="display: block"
-                                    src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
-                                    width="10%"
-                                    height="10%"
-                            /> </td>
-                            <td class="white_font"><strong>${fruit.name}</strong></td>
-                            <td class="white_font">${fruit.price}</td>
-                            <td class="white_font">${fruit.quantity}</td>
-                            <td class="white_font">${fruit.description}</td>
-                            <td>
-                                <a href="${pageContext.request.contextPath }/admin/dashboard/delete/${fruit.name}" onclick="return confirm('Are you sure?')">Delete</a>
+                            <td class="white_font"><strong>${category.name}</strong></td>
+                            <td class="white_font">
+                                <c:forEach var="fruit" items="${category.fruits}">
+                                    ${fruit.name},
+                                </c:forEach>
                             </td>
-
+                            <td>
+                                <a href="${pageContext.request.contextPath }:/admin/categoryDashboard/delete/${category.name}"
+                                   onclick="return confirm('Are you sure?\nThe affected fruits will be :' +
+                                           ' ${category.fruitsAsString}')">Delete</a>
+                            </td>
                         </tr>
                     </c:forEach>
 

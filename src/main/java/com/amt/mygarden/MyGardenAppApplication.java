@@ -82,6 +82,7 @@ public class MyGardenAppApplication extends SpringBootServletInitializer {
 
             //Item
             // to erase
+
             itemRepository.deleteAll();
             Item i1=new Item("admin",f1,5);
             Item i2=new Item("admin",f2,2);
