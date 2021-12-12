@@ -133,10 +133,9 @@
                                     </c:if>
                                     <div class="form-group">
                                         <form:input path="username" cssClass="form-control" placeholder="Username"/>
-<%--                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">--%>
                                     </div>
                                     <div class="form-group">
-                                        <form:input path="password" cssClass="form-control" placeholder="Password"/>
+                                        <form:input type="password" path="password" cssClass="form-control" placeholder="Password"/>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
