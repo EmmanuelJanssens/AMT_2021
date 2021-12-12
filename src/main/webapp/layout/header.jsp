@@ -10,7 +10,7 @@
                     <div class="full">
                         <div class="center-desk">
                             <div class="logo">
-                                <a href="index.jsp"><img src="${pageContext.request.contextPath}/images/logo_mg.png" alt="#"></a>
+                                <a href="<c:url value='/' />"><img src="<c:url value='/images/logo_mg.png' />" alt="#"></a>
                             </div>
                         </div>
                     </div>
@@ -23,34 +23,34 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="/">Home</a>
+                                    <a class="nav-link" href="<c:url value='/' />">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/fruits">fruits ${pageContext.request.contextPath}</a>
+                                    <a class="nav-link" href="<c:url value='/fruits' />">Fruits</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/cart">cart ${pageContext.request.contextPath}</a>
+                                    <a class="nav-link" href="<c:url value='/cart' />">Cart</a>
                                 </li>
-                                <li class="nav-item">
-                                    <!--TODO display only if logged in a s admin-->
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">dashboard ${pageContext.request.contextPath} </a>
-                                </li>
-                                <c:choose>
-                                    <c:when test="${sessionScope.containsKey(\"username\")}">
+                                <sec:authorize access="isAuthenticated()">
+                                    <sec:authorize access="hasRole('ADMIN')">
                                         <li class="nav-item">
-                                            <form:form action="${pageContext.request.contextPath}/logout"
-                                                       method="POST"
-                                            >
-                                                <button type="submit" class="btn btn-light">${sessionScope.username}</button>
-                                            </form:form>
+                                            <a class="nav-link" href="<c:url value='/admin/dashboard' />">Dashboard</a>
                                         </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
-                                        </li>
-                                    </c:otherwise>
-                                </c:choose>
+                                    </sec:authorize>
+
+                                    <li class="nav-item">
+                                        <form:form action="/logout"
+                                                   method="POST"
+                                        >
+                                            <button type="submit" class="btn btn-light"><sec:authentication property="principal" /> </button>
+                                        </form:form>
+                                    </li>
+                                </sec:authorize>
+                                <sec:authorize access="isAnonymous()">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<c:url value="/login" />">Login</a>
+                                    </li>
+                                </sec:authorize>
                             </ul>
                         </div>
                     </nav>
