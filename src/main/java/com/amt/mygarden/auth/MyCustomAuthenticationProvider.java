@@ -13,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -38,30 +39,26 @@ public class MyCustomAuthenticationProvider implements AuthenticationProvider {
         HttpEntity<String> entity = new HttpEntity<>(payload, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity(uri, entity, String.class);
-
-        if (response.getStatusCode() == HttpStatus.OK) {
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(uri, entity, String.class);
             String body = response.getBody();
             ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                JsonNode root = objectMapper.readTree(body);
-                JsonNode account = root.path("account");
 
-                List<GrantedAuthority> grantedAuths = new ArrayList<>();
-                grantedAuths.add(new SimpleGrantedAuthority("ROLE_" + account.get("role").asText().toUpperCase()));
-                result = new UsernamePasswordAuthenticationToken(
-                        username,
-                        root.get("token").asText(),
-                        grantedAuths
-                );
+            JsonNode root = objectMapper.readTree(body);
+            JsonNode account = root.path("account");
 
-                return result;
-            } catch (JsonProcessingException e) {
-                // todo: invalid format
-                e.printStackTrace();
-            }
+            List<GrantedAuthority> grantedAuths = new ArrayList<>();
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_" + account.get("role").asText().toUpperCase()));
+            result = new UsernamePasswordAuthenticationToken(
+                    username,
+                    root.get("token").asText(),
+                    grantedAuths
+            );
+
+            return result;
+        } catch (HttpStatusCodeException | JsonProcessingException ex) {
+            throw new BadCredentialsException("Invalid credentials");
         }
-        throw new BadCredentialsException("Invalid credentials");
     }
 
     @Override

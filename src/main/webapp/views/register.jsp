@@ -123,9 +123,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form:form id="register-form" action="/register" method="post" role="form" modelAttribute="registerForm">
-                                    <c:if test="${error != null}">
+                                    <c:if test="${errors != null}">
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <p>${error}</p>
+                                            <ul>
+                                                <c:forEach items="${errors}" var="error">
+                                                    <li>${error}</li>
+                                                </c:forEach>
+                                            </ul>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
