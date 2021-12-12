@@ -1,22 +1,23 @@
 package com.amt.mygarden.controllers;
 
 import com.amt.mygarden.validation.RegisterForm;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -43,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register")
-    public String registerUser(@ModelAttribute RegisterForm registerForm, BindingResult result) {
+    public String registerUser(@ModelAttribute RegisterForm registerForm, BindingResult result, Model model) throws JsonProcessingException {
         if (result.hasErrors()) {
             return "register";
         }
@@ -57,11 +58,24 @@ public class AuthController {
         HttpEntity<String> entity = new HttpEntity<>(payload, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = null;
-        // todo: handle errors return back to register if error
-        response = restTemplate.postForEntity(uri, entity, String.class);
-
-        return "redirect:/login?new_account";
-
+        try {
+            restTemplate.postForEntity(uri, entity, String.class);
+            return "redirect:/login?new_account";
+        } catch (HttpStatusCodeException ex) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode root = objectMapper.readTree(ex.getResponseBodyAsString());
+            ArrayList<String> errors = new ArrayList<>();
+            if (root.hasNonNull("error")) {
+                errors.add(root.path("error").asText());
+            }
+            if (root.hasNonNull("errors")) {
+                JsonNode jsonErrors = root.path("errors");
+                for (JsonNode error: jsonErrors) {
+                    errors.add(error.get("property").asText() + " : " + error.get("message").asText());
+                }
+            }
+            model.addAttribute("errors", errors);
+        }
+        return "register";
     }
 }
