@@ -35,48 +35,8 @@
 
     <jsp:attribute name="bottomScrips">
         <script>
-
-            <%-- Quantity buttons group --%>
-            $('.btn-number').click(function(e){
-                e.preventDefault();
-
-                fieldName = $(this).attr('data-field');
-                type      = $(this).attr('data-type');
-                idItem   = $(this).attr('data-itemId');
-
-                var input = $("input[name='"+fieldName+"']");
-                var currentVal = parseInt(input.val());
-                if (!isNaN(currentVal)) {
-                    if(type === 'minus') {
-                        if(currentVal > input.attr('min')) {
-                            $.post("${pageContext.request.contextPath}/fruits/"+fieldName+"/remove-from-cart", {_method: "delete"})
-                                .done(() => {
-                                    input.val(currentVal - 1).change();
-                                    if (currentVal <= 1) {
-                                        window.location.reload()
-                                    }
-                                })
-                        }
-                    } else if(type === 'plus') {
-                        if(currentVal < input.attr('max')) {
-                            $.post("${pageContext.request.contextPath}/fruits/"+fieldName+"/add-to-cart")
-                                .done(() => {
-                                    input.val(currentVal + 1).change();
-                                    if((currentVal + 1) === input.attr('max')) {
-                                        $(this).attr('disabled', true);
-                                    }
-                                })
-                        }
-                    }
-                } else {
-                    input.val(0);
-                }
-            });
-
             <%-- Empty cart view --%>
             window.onload = function checkCart(){
-                var items = $('.cartContent');
-
                 if($("#oneItem").length === 0){
                     $('#cartTitle').text("Oh no! Your cart is empty :(")
                     $('#idThead').hide();
@@ -122,17 +82,19 @@
                             <div class="center">
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default btn-number" data-itemId="${item.id}" data-type="minus" data-field="${item.fruit.name}">
-                                          <!--<span class="glyphicon glyphicon-minus"></span>-->
-                                          <i class="fa fa-minus"></i>
-                                      </button>
+                                        <form:form method="delete" action="/fruits/${item.fruit.name}/remove-from-cart">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </form:form>
                                     </span>
-                                    <input id="inputQuantity" type="text" name="${item.fruit.name}" class="form-control input-number" value="${item.quantity}" min="0" max="100" readonly>
+                                    <input id="inputQuantity" type="text" name="${item.fruit.name}" class="form-control input-number" value="${item.quantity}" readonly>
                                     <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="${item.fruit.name}">
-                                          <!--<span class="glyphicon glyphicon-plus"></span>-->
-                                          <i class="fa fa-plus"></i>
-                                      </button>
+                                        <form:form method="post" action="/fruits/${item.fruit.name}/add-to-cart">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </form:form>
                                     </span>
                                 </div>
                             </div>

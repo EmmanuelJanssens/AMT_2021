@@ -1,20 +1,23 @@
 package com.amt.mygarden.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.amt.mygarden.validation.RegisterForm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 public class AuthController {
@@ -22,24 +25,31 @@ public class AuthController {
     String loginAPIPath;
 
     @GetMapping(path = "/login")
-    public String getLogin(HttpServletRequest request) {
-        if (request.getSession().getAttribute("username") != null) {
-            // todo: send 403 error instead of redirect
-            return "redirect:/";
-        }
+    public String getLogin(Model model,
+                           @RequestParam Optional<String> error,
+                           @RequestParam Optional<String> logout,
+                           @RequestParam Optional<String> new_account
+    ) {
+        if (error.isPresent()) model.addAttribute("error", error);
+        if (logout.isPresent()) model.addAttribute("logout", logout);
+        if (new_account.isPresent()) model.addAttribute("new_account", new_account);
+
         return "login";
     }
 
-    @PostMapping(path = "/logout")
-    public String logoutUser(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return "redirect:/";
+    @GetMapping(path = "/register")
+    public ModelAndView showRegister() {
+        return new ModelAndView("register", "registerForm", new RegisterForm());
     }
 
-    @PostMapping(path = "/login")
-    public String authenticateUSer(@RequestParam String username, @RequestParam String password, HttpServletRequest request, Model model) throws JsonProcessingException {
-        String uri = loginAPIPath + "/auth/login";
-        String payload = "{\"username\":\""+username+"\", \"password\":\""+password+"\"}";
+    @PostMapping(path = "/register")
+    public String registerUser(@ModelAttribute RegisterForm registerForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "register";
+        }
+
+        String uri = loginAPIPath + "/accounts/register";
+        String payload = registerForm.toString();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -47,28 +57,11 @@ public class AuthController {
         HttpEntity<String> entity = new HttpEntity<>(payload, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity(uri, entity, String.class);
+        ResponseEntity<String> response = null;
+        // todo: handle errors return back to register if error
+        response = restTemplate.postForEntity(uri, entity, String.class);
 
-        if (response.getStatusCode() == HttpStatus.OK) {
-            String body = response.getBody();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode root = objectMapper.readTree(body);
-            JsonNode account = root.path("account");
+        return "redirect:/login?new_account";
 
-            // save into session
-            HttpSession session = request.getSession();
-            session.setAttribute("userid", account.get("id"));
-            session.setAttribute("username", account.get("username"));
-            session.setAttribute("role", account.get("role"));
-            session.setAttribute("token", root.get("token"));
-            return "redirect:/";
-        }
-        else if (response.getStatusCode() == HttpStatus.FORBIDDEN) {
-            model.addAttribute("error", "The credentials are incorrect");
-        }else {
-            model.addAttribute("error", "Unknow error please try again in a while");
-        }
-
-        return "login";
     }
 }
