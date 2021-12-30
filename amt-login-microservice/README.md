@@ -2,6 +2,15 @@
 This app is a Login api that gives a jwt token if given credentials are correct.
 
 ## Available routes
+See the openAPI [documentation file](./openapiDoc.yaml)
+
+## Default user
+username: mygarden  
+password: 1234  
+role: admin
+
+You can change the default user inside [seeds](./database/seeders/DatabaseSeeder.php) before running the `php artisan migrate --seed or php artisan db:seed` or by adding a new user into the database by hand.
+
 # First run
 Before executing the docker file for the first time you must run the following command from amt-login-microservice root directory: `docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/var/www/html -w /var/www/html laravelsail/php81-composer:latest composer install --ignore-platform-reqs`  
 That command is going to create a vendor directory containing all necessary files to run the docker environment.

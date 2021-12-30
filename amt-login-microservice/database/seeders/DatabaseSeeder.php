@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::create([
            'id' => 'admin'
         ]);
-        // \App\Models\User::factory(10)->create();
+
         \App\Models\User::create([
-          'username' => 'fabio',
+          'username' => 'mygarden',
           'role_id' => 'admin',
           'password' => bcrypt('1234')
         ]);
