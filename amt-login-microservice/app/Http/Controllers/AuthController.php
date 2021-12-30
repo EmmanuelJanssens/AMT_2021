@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
+use App\Http\Resources\AccountResource;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,7 @@ class AuthController extends Controller
       }
 
       if (! $token = auth()->attempt($validator->validated())) {
-          return response()->json(['error' => 'Unauthorized'], 401);
+          return response()->json(['error' => 'Invalid credentials'], 401);
       }
 
       return $this->createNewToken($token);
@@ -53,10 +54,7 @@ class AuthController extends Controller
           'role_id' => 'user'
       ]);
 
-      return response()->json([
-          'message' => 'User successfully registered',
-          'user' => $user
-      ], 201);
+      return response()->json(new AccountResource($user), 201);
   }
 
 
@@ -86,7 +84,7 @@ class AuthController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
   public function userProfile() {
-      return response()->json(auth()->user());
+      return new AccountResource(auth()->user());
   }
 
   /**
@@ -100,13 +98,9 @@ class AuthController extends Controller
       $user = auth()->user();
       return response()->json([
           'token' => $token,
-//          'token_type' => 'bearer',
-//          'expires_in' => auth()->factory()->getTTL() * 60,
-          'account' => [
-              'id' => $user->id,
-              'username' => $user->username,
-              'role' => $user->role->id,
-          ]
+          'token_type' => 'bearer',
+          'expires_in' => auth()->factory()->getTTL() * 60,
+          'account' => new AccountResource($user)
       ]);
   }
 }
