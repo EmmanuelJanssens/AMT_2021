@@ -18,12 +18,11 @@ services:
       - mygarden-mysql
     volumes:
       - ./target/mygarden-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
-#      - ./wait-for-it.sh:/usr/local/wait-for-it.sh
+      - ./wait-for-it.sh:/usr/local/wait-for-it.sh
     container_name: mygarden
     networks:
       - amt-aws
-    entrypoint: ["/usr/local/tomcat/bin/catalina.sh", "jpda", "run"]
-#    command: ""
+    entrypoint: ["/usr/local/wait-for-it.sh","-t","0","mygarden-mysql:3306","--","/usr/local/tomcat/bin/catalina.sh", "jpda", "run"]
 
   mygarden-mysql:
     image: 'mysql:8'
