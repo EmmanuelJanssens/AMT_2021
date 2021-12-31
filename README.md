@@ -10,7 +10,7 @@ Haute École d'Ingénierie et Gestion du Canton du Vaud
 # Logo
 
 
-![src\main\webapp\images\logo_mg.png](src\main\webapp\images\logo_mg.png)
+![src\main\webapp\images\logo_mg.png](./src/main/webapp/images/logo_mg.png)
 
 
 
@@ -90,17 +90,17 @@ You must have docker installed and running
 
 The java source is Java 1.8+ so any JDK 1.8 or later will work. However, in order to generate the javadoc and UML diagrams the JDK version must be *strictly 1.8*.
 
-There is no need to configure specific run configurations, there are predefined xml config files under ./runConfiguration. All you need to do is add them
-And you will be able to run the app.
+There is no need to configure specific run configurations if you use intelliJ, there are predefined xml config files under ./runConfiguration.
 
-<p align="center">
-<img src="https://github.com/EmmanuelJanssens/AMT_2021/blob/dev/documentation/images/run_config.png" width = 50% />
-</p>
+![run config](./documentation/images/run_config.png)
 
 * It will execute those maven goals clean and package
 * It will execute a docker compose file wich will pull two images from the hub : tomcat:9 and mysql
   * your packaged .war file will be transported into the tomcat webapps folder
 * after execution you will be able to access the app via http://localhost:8080/
+
+Before running the docker file you will need to copy the .env.example into .env and customise the values if needed.
+Once done you should follow the [Readme to configure the login microservice](./amt-login-microservice/README.md) and you should be ready to go.
 
 # Project Structure
 

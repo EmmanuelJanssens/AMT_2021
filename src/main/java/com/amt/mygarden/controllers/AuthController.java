@@ -18,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -49,7 +51,7 @@ public class AuthController {
             return "register";
         }
 
-        String uri = loginAPIPath + "/accounts/register";
+        String uri = loginAPIPath + "/auth/register";
         String payload = registerForm.toString();
 
         HttpHeaders headers = new HttpHeaders();
@@ -63,18 +65,26 @@ public class AuthController {
             return "redirect:/login?new_account";
         } catch (HttpStatusCodeException ex) {
             ObjectMapper objectMapper = new ObjectMapper();
+            String response = ex.getResponseBodyAsString();
             JsonNode root = objectMapper.readTree(ex.getResponseBodyAsString());
             ArrayList<String> errors = new ArrayList<>();
+
             if (root.hasNonNull("error")) {
                 errors.add(root.path("error").asText());
-            }
-            if (root.hasNonNull("errors")) {
-                JsonNode jsonErrors = root.path("errors");
-                for (JsonNode error: jsonErrors) {
-                    errors.add(error.get("property").asText() + " : " + error.get("message").asText());
+            } else {
+                Iterator<Map.Entry<String, JsonNode>> nodes = root.fields();
+                while (nodes.hasNext()) {
+                    Map.Entry<String, JsonNode> entry = (Map.Entry<String, JsonNode>) nodes.next();
+                    JsonNode node = entry.getValue();
+                    if (node.isArray()) {
+                        for (JsonNode error : node) {
+                            errors.add(entry.getKey() + " : " + error.asText());
+                        }
+                    }
                 }
+                model.addAttribute("errors", errors);
             }
-            model.addAttribute("errors", errors);
+
         }
         return "register";
     }
