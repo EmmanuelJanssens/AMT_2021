@@ -65,7 +65,6 @@ public class AuthController {
             return "redirect:/login?new_account";
         } catch (HttpStatusCodeException ex) {
             ObjectMapper objectMapper = new ObjectMapper();
-            String response = ex.getResponseBodyAsString();
             JsonNode root = objectMapper.readTree(ex.getResponseBodyAsString());
             ArrayList<String> errors = new ArrayList<>();
 
@@ -74,7 +73,7 @@ public class AuthController {
             } else {
                 Iterator<Map.Entry<String, JsonNode>> nodes = root.fields();
                 while (nodes.hasNext()) {
-                    Map.Entry<String, JsonNode> entry = (Map.Entry<String, JsonNode>) nodes.next();
+                    Map.Entry<String, JsonNode> entry = nodes.next();
                     JsonNode node = entry.getValue();
                     if (node.isArray()) {
                         for (JsonNode error : node) {
