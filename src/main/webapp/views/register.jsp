@@ -142,6 +142,9 @@
                                         <form:input type="password" path="password" cssClass="form-control" placeholder="Password"/>
                                     </div>
                                     <div class="form-group">
+                                        <form:input type="password" path="password_confirmation" cssClass="form-control" placeholder="Password confirmation"/>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
                                                 <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
