@@ -19,7 +19,7 @@ Once first step done we need to install and configure all dependencies
 * Run docker-compose from `My_garden` root directory
 * open shell inside docker `docker exec -u sail login_microservice /bin/bash`
 * create .env file `envsubst < .env.example > .env`
-* install dependecies `php artisan key:generate`
+* install dependecies `composer install`
 * generate app secret `php artisan key:generate`
 * generate jwt secret `php artisan jwt:secret`
 * run migrations `php artisan migrate --seed`  
