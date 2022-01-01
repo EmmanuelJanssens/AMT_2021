@@ -148,6 +148,11 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.3.10.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.131</version>
+        </dependency>
     </dependencies>
 
     <build>

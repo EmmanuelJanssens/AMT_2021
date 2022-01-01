@@ -102,7 +102,7 @@
                                 </c:when>
                             </c:choose>
 
-                            <img src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="">
+                            <img src="${pageContext.request.contextPath}/download/${fruit.image}" alt="">
                         </div>
                     </div>
                     <div class="col-md-6">
