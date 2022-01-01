@@ -99,7 +99,8 @@ There is no need to configure specific run configurations if you use intelliJ, t
   * your packaged .war file will be transported into the tomcat webapps folder
 * after execution you will be able to access the app via http://localhost:8080/
 
-Before running the docker file you will need to copy the .env.example into .env and customise the values if needed.
+Before running the docker file you will need to copy the .env.example into .env and customise the values if needed.  
+You will also need to copy the `application.properties.example` into `application.properties` inside `src/main/resources/` and insert your s3 credentials.
 Once done you should follow the [Readme to configure the login microservice](./amt-login-microservice/README.md) and you should be ready to go.
 
 # Project Structure
