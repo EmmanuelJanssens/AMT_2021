@@ -1,4 +1,5 @@
 # Project Ignores Files
+application.properties
 
 # Maven
 .mvn

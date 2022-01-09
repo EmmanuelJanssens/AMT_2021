@@ -4,5 +4,25 @@
       "name": "login-api.path",
       "type": "java.lang.String",
       "description": "path for login api"
-  }
-] }
+    },
+    {
+      "name": "s3.key.id",
+      "type": "java.lang.String",
+      "description": "access key for s3 bucket"
+    },
+    {
+      "name": "s3.key.secret",
+      "type": "java.lang.String",
+      "description": "secret for s3 bucket"
+    },
+    {
+      "name": "s3.region.name",
+      "type": "java.lang.String",
+      "description": "region of s3 bucket"
+    },
+    {
+      "name": "s3.bucket.name",
+      "type": "java.lang.String",
+      "description": "name of s3 bucket"
+    }
+  ] }

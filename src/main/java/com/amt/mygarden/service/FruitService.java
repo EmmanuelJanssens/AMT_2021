@@ -1,22 +1,23 @@
 package com.amt.mygarden.service;
 
-import com.amt.mygarden.models.Category;
 import com.amt.mygarden.models.Fruit;
 import com.amt.mygarden.models.Item;
 import com.amt.mygarden.repository.CategoryRepository;
 import com.amt.mygarden.repository.FruitRepository;
 
 import com.amt.mygarden.repository.ItemRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
+
+import static org.apache.http.entity.ContentType.*;
 
 @Service
+@AllArgsConstructor
 public class FruitService {
     @Autowired
     FruitRepository fruitRepository;
@@ -26,6 +27,8 @@ public class FruitService {
 
     @Autowired
     ItemRepository itemRepository;
+
+    private final FileStore fileStore;
 
     public Iterable<Fruit> getAllFruits() {
         return fruitRepository.findAll();
@@ -43,16 +46,29 @@ public class FruitService {
         }
         else{
             MultipartFile file = fruit.getImageFile();
-            if(file.getOriginalFilename().isEmpty()){
-                fruit.setImage("placeholder.jpg");
-            }
-            else{
-                String upload = "/usr/local/mygarden/images/";
-                File dir = new File(upload + File.separator + "fruitImages"+File.separator);
-                if(!dir.exists())
-                    dir.mkdirs();
-                FileCopyUtils.copy(file.getBytes(),new File(dir.getAbsolutePath()+File.separator+fruit.getName()+file.getOriginalFilename()));
-                fruit.setImage(fruit.getName()+file.getOriginalFilename());
+            if(!file.isEmpty()){
+                if (!Arrays.asList(IMAGE_PNG.getMimeType(),
+                        IMAGE_BMP.getMimeType(),
+                        IMAGE_GIF.getMimeType(),
+                        IMAGE_JPEG.getMimeType()).contains(file.getContentType())) {
+                    throw new IllegalStateException("File updloaded is not an image");
+                }
+
+                // get file metadata
+                Map<String, String> metadata = new HashMap<>();
+                metadata.put("Content-Type", file.getContentType());
+                metadata.put("Content-Length", String.valueOf(file.getSize()));
+
+                // Save image in s3 bucket
+                String filename = String.format("%s", UUID.randomUUID());
+
+                try {
+                    fileStore.upload(filename, Optional.of(metadata), file.getInputStream());
+                } catch (IOException e) {
+                    throw new IllegalStateException("Failed to upload file", e);
+                }
+
+                fruit.setImage(filename);
             }
 
             fruitRepository.save(fruit);
@@ -65,6 +81,8 @@ public class FruitService {
         fruit.deleteCategories();
         deleteItemsContaining(fruit);
         fruitRepository.delete(fruit);
+
+        //todo: delete fruit image
     }
 
     public void deleteFruitById(String id) {

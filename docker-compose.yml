@@ -9,23 +9,70 @@ services:
       JPDA_ADDRESS: "*:8000"
       JPDA_TRANSPORT: dt_socket
       SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: mygarden-mysql
+      DB_USER: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${MYGARDEN_DATABASE}
+      LOGIN_HOST: login-microservice
     depends_on:
-      - "mygarden-mysql"
+      - mygarden-mysql
     volumes:
       - ./target/mygarden-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
       - ./wait-for-it.sh:/usr/local/wait-for-it.sh
     container_name: mygarden
-    entrypoint: ["/usr/local/wait-for-it.sh","-t","0","mygarden-mysql.amt-aws:3306","--","/usr/local/tomcat/bin/catalina.sh", "jpda","run"  ]
-    command: ""
+    networks:
+      - amt-aws
+    entrypoint: ["/usr/local/wait-for-it.sh","-t","0","mygarden-mysql:3306","--","/usr/local/tomcat/bin/catalina.sh", "jpda", "run"]
 
   mygarden-mysql:
-    image: "mysql"
-    ports :
-      - "3306:3306"
+    image: 'mysql:8'
+    ports:
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYGARDEN_DB: ${MYGARDEN_DATABASE}
+      LOGIN_DB: ${LOGIN_DATABASE}
+    volumes:
+      - './databases:/docker-entrypoint-initdb.d'
+    networks:
+      - amt-aws
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+      retries: 3
+      timeout: 5s
     container_name: mygarden-mysql
 
+  login-microservice:
+    build:
+      context: ./amt-login-microservice/vendor/laravel/sail/runtimes/8.1
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.1/app
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '${APP_PORT:-80}:80'
+    environment:
+      WWWUSER: '${WWWUSER}'
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+      DB_USERNAME: '${DB_USERNAME}'
+      DB_PASSWORD: '${DB_PASSWORD}'
+      DB_HOST: mygarden-mysql
+      DB_DATABASE: '${LOGIN_DATABASE}'
+    volumes:
+      - './amt-login-microservice:/var/www/html'
+    networks:
+      - amt-aws
+    depends_on:
+      - mygarden-mysql
+    container_name: login_microservice
 networks:
-  default:
-    name: amt-aws
+  amt-aws:
+    driver: bridge

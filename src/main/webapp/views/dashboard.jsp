@@ -76,7 +76,7 @@
                         <tr>
                             <td><img
                                     style="display: block"
-                                    src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
+                                    src="${pageContext.request.contextPath}/download/${fruit.image}" alt="image"
                                     width="10%"
                                     height="10%"
                             /> </td>
