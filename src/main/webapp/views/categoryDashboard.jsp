@@ -62,7 +62,7 @@
                     <tr>
                         <th scope="col">name</th>
                         <th scope="col">fruits</th>
-                        <th scope="col">delete</th>
+                        <th scope="col">action</th>
                     </tr>
                     </thead>
                     <tbody id="fruits-body">
