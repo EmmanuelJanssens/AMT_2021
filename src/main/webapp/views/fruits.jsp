@@ -36,7 +36,7 @@
                                         <img src = "${pageContext.request.contextPath}/images/unavailable.png" alt="" style="position:absolute; top:0; left:0">
                                     </c:when>
                                 </c:choose>
-                                <img src="${pageContext.request.contextPath}/download?filename=${fruit.image}" class="img-responsive" alt="">
+                                <img src="${pageContext.request.contextPath}/download/${fruit.image}" class="img-responsive" alt="">
                             </div>
                             <div class="col-sm-8">
                                 <h3 class="title">${fruit.name}</h3>

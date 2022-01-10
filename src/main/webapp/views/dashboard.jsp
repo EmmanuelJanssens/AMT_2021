@@ -65,7 +65,7 @@
                         <th scope="col">price</th>
                         <th scope="col">quantity</th>
                         <th scope="col">description</th>
-                        <th scope="col">delete</th>
+                        <th scope="col">action</th>
                     </tr>
                     </thead>
                     <tbody id="fruits-body">
@@ -76,7 +76,7 @@
                         <tr>
                             <td><img
                                     style="display: block"
-                                    src="${pageContext.request.contextPath}/download?filename=${fruit.image}" alt="image"
+                                    src="${pageContext.request.contextPath}/download/${fruit.image}" alt="image"
                                     width="10%"
                                     height="10%"
                             /> </td>
