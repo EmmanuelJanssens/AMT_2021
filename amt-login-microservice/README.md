@@ -44,5 +44,9 @@ If some changes have been made to the microservice you may have to execute the f
 * run migrations `docker exec -u sail login_microservice php artisan migrate`
 * add new seeds `docker exec -u sail login_microservice php artisan db:seed`
 
+# Run tests
+To run tests execute the following command  
+`docker exec -u sail login_microservice php artisan test`
+
 # Troubleshoot
 If you have any problem related to Laravel configuration please refer to [laravel documentation](https://laravel.com/docs/8.x)
